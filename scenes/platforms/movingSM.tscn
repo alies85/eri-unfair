@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj2afsj5h1r2y"]
+
+[ext_resource type="Script" uid="uid://bcy03y5yatk52" path="res://scripts/platforms/moving.gd" id="1_kxcxf"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_cv7ls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7efg"]
+size = Vector2(16, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxcxf"]
+atlas = ExtResource("2_cv7ls")
+region = Rect2(51, 51, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f0xak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxcxf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MovingPlatformSM" type="Path2D"]
+script = ExtResource("1_kxcxf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+loop = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="PathFollow2D"]
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_y7efg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(0, 5)
+sprite_frames = SubResource("SpriteFrames_f0xak")

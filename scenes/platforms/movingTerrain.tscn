@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxi4e5wlpa67g"]
+
+[ext_resource type="Script" uid="uid://dt1xrf1sr1hd6" path="res://scripts/platforms/movingTerrain.gd" id="1_737gm"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_3e31l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7efg"]
+size = Vector2(48, 79.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbcbc"]
+atlas = ExtResource("2_3e31l")
+region = Rect2(136, 68, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f0xak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbcbc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5gua"]
+atlas = ExtResource("2_3e31l")
+region = Rect2(136, 85, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2h7mx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5gua")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_737gm"]
+a = Vector2(0, -73)
+
+[node name="MovingTerrain" type="Path2D"]
+script = ExtResource("1_737gm")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+loop = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="PathFollow2D"]
+position = Vector2(0, -42)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(0, 42.25)
+shape = SubResource("RectangleShape2D_y7efg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(-16, 10)
+sprite_frames = SubResource("SpriteFrames_f0xak")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(16, 10)
+sprite_frames = SubResource("SpriteFrames_f0xak")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(-16, 26)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(16, 74)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(0, 74)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(-16, 74)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(16, 58)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(0, 58)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(-16, 58)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D11" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(16, 42)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D12" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(0, 42)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D13" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(-16, 42)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D14" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(16, 26)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D15" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(0, 26)
+sprite_frames = SubResource("SpriteFrames_2h7mx")
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+visibility_layer = 2
+position = Vector2(0, 10)
+sprite_frames = SubResource("SpriteFrames_f0xak")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-32, -49)
+shape = SubResource("SegmentShape2D_737gm")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

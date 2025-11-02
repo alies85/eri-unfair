@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckltobbyi5eu"]
+
+[ext_resource type="Script" uid="uid://bcy03y5yatk52" path="res://scripts/platforms/moving.gd" id="1_swt0n"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_y7efg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7efg"]
+size = Vector2(48, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u15i"]
+atlas = ExtResource("2_y7efg")
+region = Rect2(85, 51, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f0xak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u15i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13jdc"]
+atlas = ExtResource("2_y7efg")
+region = Rect2(102, 51, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4u15i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13jdc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px41s"]
+atlas = ExtResource("2_y7efg")
+region = Rect2(68, 51, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u08du"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px41s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MovingPlatform" type="Path2D"]
+script = ExtResource("1_swt0n")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+loop = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="PathFollow2D"]
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_y7efg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(0, 5)
+sprite_frames = SubResource("SpriteFrames_f0xak")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(16, 5)
+sprite_frames = SubResource("SpriteFrames_4u15i")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
+position = Vector2(-16, 5)
+sprite_frames = SubResource("SpriteFrames_u08du")

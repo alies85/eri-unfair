@@ -1,0 +1,129 @@
+[gd_scene load_steps=16 format=3 uid="uid://cd7guqg431q4v"]
+
+[ext_resource type="Script" uid="uid://qjnpe514v42r" path="res://scripts/platforms/breaking.gd" id="1_pbxv8"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_5caks"]
+[ext_resource type="Texture2D" uid="uid://dgnnruqpusokn" path="res://assets/particles.png" id="3_2y41l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbxv8"]
+size = Vector2(64, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5caks"]
+atlas = ExtResource("2_5caks")
+region = Rect2(102, 68, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6yg4y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5caks")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ao1h"]
+atlas = ExtResource("2_5caks")
+region = Rect2(85, 68, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8ndo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ao1h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ragig"]
+atlas = ExtResource("2_5caks")
+region = Rect2(68, 68, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3yv8k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ragig")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2y41l"]
+size = Vector2(55, 2)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0mr27"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_r7bfu"]
+offsets = PackedFloat32Array(0, 0.8773585, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.26415092, 0.26415092, 0.26415092, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t0i51"]
+gradient = SubResource("Gradient_r7bfu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_07q4l"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -10, 0)
+emission_shape = 3
+emission_box_extents = Vector3(37, 1, 1)
+velocity_pivot = Vector3(200, 200, 0)
+spread = 60.0
+angular_velocity_min = -60.000015
+angular_velocity_max = 74.999985
+gravity = Vector3(0, 500, 0)
+scale_min = 0.5
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_t0i51")
+anim_offset_max = 1.0
+
+[node name="BreakingPlatform" type="StaticBody2D"]
+script = ExtResource("1_pbxv8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -4)
+shape = SubResource("RectangleShape2D_pbxv8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(22, 0)
+sprite_frames = SubResource("SpriteFrames_6yg4y")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(6, 0)
+sprite_frames = SubResource("SpriteFrames_b8ndo")
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(-10, 0)
+sprite_frames = SubResource("SpriteFrames_b8ndo")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+position = Vector2(-26, 0)
+sprite_frames = SubResource("SpriteFrames_3yv8k")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2.5, -9)
+shape = SubResource("RectangleShape2D_2y41l")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_0mr27")
+position = Vector2(-5, 1)
+emitting = false
+amount = 7
+texture = ExtResource("3_2y41l")
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-10, -10, 20, 20)
+process_material = SubResource("ParticleProcessMaterial_07q4l")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

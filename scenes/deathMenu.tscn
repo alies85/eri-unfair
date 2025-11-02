@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdbutx2p2q18s"]
+
+[ext_resource type="Script" uid="uid://klecrp0a8bsi" path="res://scripts/deathMenu.gd" id="1_if853"]
+[ext_resource type="AudioStream" uid="uid://dqrau2pslqx0q" path="res://assets/gameover.wav" id="2_w8wr1"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_if853")
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = 533.0
+offset_top = 27.0
+offset_right = 750.0
+offset_bottom = 165.0
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 100
+text = "مُردی"
+horizontal_alignment = 1
+
+[node name="TitleLabel2" type="Label" parent="TitleLabel"]
+layout_mode = 0
+offset_left = -127.0
+offset_top = 105.0
+offset_right = 69.0
+offset_bottom = 164.0
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 24
+text = "بدبخت"
+horizontal_alignment = 1
+
+[node name="Options" type="VFlowContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 481.0
+offset_top = 272.0
+offset_right = 756.0
+offset_bottom = 482.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="RestartButton" type="Button" parent="Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "     شروع مجدد     "
+
+[node name="FullscreenButton" type="Button" parent="Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "تمام‌صفحه"
+
+[node name="QuitButton" type="Button" parent="Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "خروج"
+
+[node name="DeathSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_w8wr1")
+
+[connection signal="pressed" from="Options/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Options/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="Options/QuitButton" to="." method="_on_quit_button_pressed"]

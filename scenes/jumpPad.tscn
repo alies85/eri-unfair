@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://3ybr0fh382e"]
+
+[ext_resource type="Script" uid="uid://r0bjxdyjgcnl" path="res://scripts/jumpPad.gd" id="1_fjft4"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_m8g7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8h32"]
+size = Vector2(14, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7c4ey"]
+atlas = ExtResource("2_m8g7c")
+region = Rect2(51, 136, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5dau"]
+atlas = ExtResource("2_m8g7c")
+region = Rect2(68, 136, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4w2l"]
+atlas = ExtResource("2_m8g7c")
+region = Rect2(85, 136, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8h32"]
+atlas = ExtResource("2_m8g7c")
+region = Rect2(68, 136, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8g7c"]
+atlas = ExtResource("2_m8g7c")
+region = Rect2(51, 136, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5yjcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7c4ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5dau")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f4w2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8h32")
+}],
+"loop": false,
+"name": &"bounce",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8g7c")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="JumpPad" type="Area2D"]
+script = ExtResource("1_fjft4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_l8h32")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5yjcx")
+animation = &"bounce"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

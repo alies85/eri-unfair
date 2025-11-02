@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck2tvix323sld"]
+
+[ext_resource type="Script" uid="uid://ccpbdyfan8xry" path="res://scripts/textInput.gd" id="1_xd3ft"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_xd3ft")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_right = 245.0
+offset_bottom = 72.0
