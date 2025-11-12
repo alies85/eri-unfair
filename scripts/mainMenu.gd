@@ -1,24 +1,16 @@
 extends Node2D
 
-@onready var ui: CanvasLayer = $CanvasLayer
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("MainMenu ready!")
-	$Options/StartButton.grab_focus()
+	$Control/Options/StartButton.grab_focus()
 	
 	if !OS.has_feature("pc"):
-		$Options/FullscreenButton.hide()
-		$Options/QuitButton.hide()
+		$Controli/Options/FullscreenButton.hide()
+		$Control/Options/QuitButton.hide()
 
 func _on_start_button_pressed():
-	if ui.is_username_filled():
-		Global.username = ui.get_username()
-		print("🎮 شروع بازی برای:", ui.get_username())
-		get_tree().change_scene_to_file("res://scenes/levels/level%d.tscn" % [Global.currentLevel])
-	else:
-		print("⚠️ لطفاً نام کاربری را وارد کنید!")
-		ui.username_input.modulate = Color(1, 0.6, 0.6)  # رنگ هشدار
+	get_tree().change_scene_to_file("res://scenes/levels/level%d.tscn" % [Global.currentLevel])
 
 func _on_fullscreen_button_pressed():
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:

@@ -19,10 +19,3 @@ offset_top = 40.0
 offset_right = 81.0
 offset_bottom = 66.0
 text = "Gems: 0"
-
-[node name="Health" type="Label" parent="."]
-offset_left = 20.0
-offset_top = 69.0
-offset_right = 90.0
-offset_bottom = 92.0
-text = "Health: 3"

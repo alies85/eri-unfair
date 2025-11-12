@@ -1,76 +1,89 @@
-[gd_scene load_steps=3 format=3 uid="uid://m4wu5ie2ep1f"]
+[gd_scene load_steps=2 format=3 uid="uid://m4wu5ie2ep1f"]
 
 [ext_resource type="Script" uid="uid://dn7xtjyoi3odj" path="res://scripts/mainMenu.gd" id="1_qkhwq"]
-[ext_resource type="PackedScene" uid="uid://ck2tvix323sld" path="res://scenes/textInput.tscn" id="2_3d1i7"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_qkhwq")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("2_3d1i7")]
-offset = Vector2(425, 450)
-transform = Transform2D(1, 0, 0, 1, 425, 450)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 
-[node name="TitleLabel" type="Label" parent="."]
-offset_left = 435.0
-offset_top = 23.0
-offset_right = 631.0
-offset_bottom = 160.0
+[node name="GameLabel" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="TitleLabel" type="Label" parent="Control/GameLabel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 4.0
+offset_right = 40.0
+offset_bottom = 141.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 theme_type_variation = &"HeaderLarge"
 theme_override_font_sizes/font_size = 100
 text = "Eri"
 horizontal_alignment = 1
 
-[node name="TitleLabel2" type="Label" parent="TitleLabel"]
+[node name="TitleLabel2" type="Label" parent="Control/GameLabel"]
 layout_mode = 0
-offset_left = 99.0
-offset_top = 93.0
-offset_right = 295.0
-offset_bottom = 152.0
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 120.0
+offset_bottom = 130.0
 theme_type_variation = &"HeaderLarge"
 theme_override_font_sizes/font_size = 24
 text = "Unfair"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-offset_left = 328.0
-offset_top = 550.0
-offset_right = 775.0
-offset_bottom = 607.0
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 26
-text = "نام گروه: ورودیای کوچولو به جز عرفان‌شون"
-horizontal_alignment = 1
-language = "fa"
-
-[node name="Options" type="VFlowContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
+[node name="Options" type="VFlowContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 441.0
-offset_top = 222.0
-offset_right = 716.0
-offset_bottom = 432.0
+offset_left = -112.0
+offset_top = -336.0
+offset_right = 109.5
+offset_bottom = -112.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="StartButton" type="Button" parent="Options"]
+[node name="StartButton" type="Button" parent="Control/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "         شروع         "
 
-[node name="FullscreenButton" type="Button" parent="Options"]
+[node name="FullscreenButton" type="Button" parent="Control/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "تمام صفحه"
 
-[node name="QuitButton" type="Button" parent="Options"]
+[node name="ShopButton" type="Button" parent="Control/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "فروشگاه"
+
+[node name="QuitButton" type="Button" parent="Control/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "خروج"
 
-[connection signal="pressed" from="Options/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="Options/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
-[connection signal="pressed" from="Options/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Control/Options/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/Options/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="Control/Options/QuitButton" to="." method="_on_quit_button_pressed"]

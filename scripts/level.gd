@@ -8,8 +8,6 @@ func _ready():
 	
 	$HUD.score(Global.score)
 	
-	$HUD.health(Global.healthCount)
-	
 	if levelNO == 2:
 		$Door.get_child(0).disabled = true
 
@@ -20,11 +18,6 @@ func _ready():
 		trap.trap_activated.connect(_on_trap_activated)
 
 func death():
-	Global.healthCount -= 1
-	if Global.healthCount == 0:
-		Global.healthCount = 3
-		Global.currentLevel = 1
-	
 	Global.score = 0
 	Global.lvl3score = 0
 	get_tree().change_scene_to_file("res://scenes/deathMenu.tscn")

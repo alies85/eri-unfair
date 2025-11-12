@@ -4,7 +4,6 @@ var score = 0
 var currentLevel = 1
 var username = ""
 var lvl3score = 0
-var healthCount = 100
 
 func _ready():
 	print_debug("global ready!")
