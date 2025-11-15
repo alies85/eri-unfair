@@ -229,7 +229,7 @@ separation = Vector2i(1, 1)
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
-6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.3166084, -8, 8, 0.71067905, 2.436613, 4.873226, 1.1167803, 8, -1.2183075, 8, -1.2183075, 2.9442406, -5.786957, 3.0457659, -5.888482, -2.8427153, -2.87774, -8)
 7:9/0 = 0
 8:9/0 = 0
 9:9/0 = 0
@@ -283,7 +283,9 @@ separation = Vector2i(1, 1)
 1:12/0 = 0
 2:12/0 = 0
 3:12/0 = 0
+4:12/next_alternative_id = 4
 4:12/0 = 0
+5:12/next_alternative_id = 2
 5:12/0 = 0
 6:12/0 = 0
 7:12/0 = 0
@@ -554,24 +556,6 @@ sources/0 = SubResource("TileSetAtlasSource_6issp")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyffv"]
 size = Vector2(10, 14)
 
-[sub_resource type="Curve2D" id="Curve2D_plydf"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, 77, 0, 0, 0, 0, 976, 1, 0, 0, 0, 0, 981, 11)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_nfihu"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 166, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_lgguw"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0)
-}
-point_count = 2
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfihu"]
 atlas = ExtResource("2_l3e02")
 region = Rect2(119, 238, 16, 16)
@@ -660,6 +644,24 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve2D" id="Curve2D_plydf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 77, 0, 0, 0, 0, 976, 1, 0, 0, 0, 0, 981, 11)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_nfihu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 166, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_lgguw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0)
+}
+point_count = 2
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_g3s30")
 levelNO = 1
@@ -693,7 +695,7 @@ position = Vector2(440, 87)
 shape = SubResource("RectangleShape2D_gyffv")
 
 [node name="Door" parent="." instance=ExtResource("4_hvikv")]
-position = Vector2(1481, 199)
+position = Vector2(1481, 200)
 levelNO = 2
 
 [node name="Label" type="Label" parent="Door"]
@@ -737,6 +739,44 @@ position = Vector2(1104, 184)
 [node name="Gem9" parent="Gems" instance=ExtResource("5_lq6yu")]
 position = Vector2(1168, 192)
 
+[node name="Gem10" parent="Gems" instance=ExtResource("5_lq6yu")]
+position = Vector2(907, 33)
+
+[node name="Gem11" parent="Gems" instance=ExtResource("5_lq6yu")]
+position = Vector2(830, 40)
+
+[node name="Gem12" parent="Gems" instance=ExtResource("5_lq6yu")]
+position = Vector2(995, 27)
+
+[node name="Gem13" parent="Gems" instance=ExtResource("5_lq6yu")]
+position = Vector2(1078, 21)
+
+[node name="Fan" type="Node" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Fan"]
+position = Vector2(782, 160)
+sprite_frames = SubResource("SpriteFrames_jprdt")
+autoplay = "default"
+frame_progress = 0.6024617
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Fan"]
+position = Vector2(798, 160)
+sprite_frames = SubResource("SpriteFrames_1xax6")
+autoplay = "default"
+frame_progress = 0.4707212
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Fan"]
+position = Vector2(798, 176)
+sprite_frames = SubResource("SpriteFrames_gvm5i")
+autoplay = "default"
+frame_progress = 0.73128796
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Fan"]
+position = Vector2(782, 176)
+sprite_frames = SubResource("SpriteFrames_6gwlt")
+autoplay = "default"
+frame_progress = 0.7858989
+
 [node name="MovingPlatform" parent="." instance=ExtResource("9_plydf")]
 position = Vector2(473, 3)
 curve = SubResource("Curve2D_plydf")
@@ -755,34 +795,9 @@ ease_strength = 4.0
 [node name="MovingTerrain" parent="." instance=ExtResource("12_nfihu")]
 position = Vector2(1160, 264)
 curve = SubResource("Curve2D_lgguw")
-move_duration = 0.5
+move_duration = 1.0
+ease_type = 5
 ease_mode = 1
-
-[node name="Node" type="Node" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node"]
-position = Vector2(782, 160)
-sprite_frames = SubResource("SpriteFrames_jprdt")
-autoplay = "default"
-frame_progress = 0.6024617
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node"]
-position = Vector2(798, 160)
-sprite_frames = SubResource("SpriteFrames_1xax6")
-autoplay = "default"
-frame_progress = 0.4707212
-
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Node"]
-position = Vector2(798, 176)
-sprite_frames = SubResource("SpriteFrames_gvm5i")
-autoplay = "default"
-frame_progress = 0.73128796
-
-[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Node"]
-position = Vector2(782, 176)
-sprite_frames = SubResource("SpriteFrames_6gwlt")
-autoplay = "default"
-frame_progress = 0.7858989
 
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
 [connection signal="player_entered" from="Door" to="." method="_on_door_player_entered"]

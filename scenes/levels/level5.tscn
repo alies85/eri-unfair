@@ -1,18 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://lnxfxw2ixsik"]
+[gd_scene load_steps=11 format=3 uid="uid://cgduumu18n3as"]
 
-[ext_resource type="Script" uid="uid://dgjlcnkx2hkfr" path="res://scripts/level.gd" id="1_6nmes"]
-[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_r3qw4"]
-[ext_resource type="PackedScene" uid="uid://bdyp538fqygcq" path="res://scenes/hud.tscn" id="3_dypo0"]
-[ext_resource type="PackedScene" uid="uid://cboi8hec4yf0c" path="res://scenes/player.tscn" id="4_yveg6"]
-[ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="6_4b87s"]
-[ext_resource type="AudioStream" uid="uid://d4h4gafdf6fil" path="res://assets/3.mp3" id="6_7eb4w"]
-[ext_resource type="PackedScene" uid="uid://dh3flqow8nnd0" path="res://scenes/platforms/movingSpikes.tscn" id="8_8w0pe"]
-[ext_resource type="PackedScene" uid="uid://ci44yfmvmjblp" path="res://scenes/platforms/movingSpike.tscn" id="9_7eb4w"]
-[ext_resource type="PackedScene" uid="uid://dl0i8gxl6741g" path="res://scenes/platforms/MovingTriggered.tscn" id="10_hadiw"]
+[ext_resource type="Script" uid="uid://dgjlcnkx2hkfr" path="res://scripts/level.gd" id="1_vnf24"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_pm1y0"]
+[ext_resource type="PackedScene" uid="uid://bdyp538fqygcq" path="res://scenes/hud.tscn" id="3_2eb3b"]
+[ext_resource type="AudioStream" uid="uid://cxoidqjb5kyw2" path="res://assets/background.mp3" id="4_kykwg"]
+[ext_resource type="PackedScene" uid="uid://cboi8hec4yf0c" path="res://scenes/player.tscn" id="5_iyn63"]
+[ext_resource type="PackedScene" uid="uid://clikcsot5ncta" path="res://scenes/door.tscn" id="6_1ix84"]
+[ext_resource type="PackedScene" uid="uid://cacvqaafnb5ed" path="res://scenes/trap.tscn" id="7_4x4hb"]
+[ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="8_fmais"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6issp"]
 resource_name = "Tilemap"
-texture = ExtResource("2_r3qw4")
+texture = ExtResource("2_pm1y0")
 separation = Vector2i(1, 1)
 1:0/0 = 0
 2:0/0 = 0
@@ -116,6 +115,8 @@ separation = Vector2i(1, 1)
 9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:4/0 = 0
 11:4/0 = 0
+11:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:4/0/physics_layer_0/polygon_0/one_way = true
 12:4/0 = 0
 13:4/0 = 0
 14:4/0 = 0
@@ -224,6 +225,7 @@ separation = Vector2i(1, 1)
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
+6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:9/0 = 0
 8:9/0 = 0
 9:9/0 = 0
@@ -467,6 +469,8 @@ separation = Vector2i(1, 1)
 19:8/0 = 0
 19:9/0 = 0
 19:10/0 = 0
+19:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+19:10/0/physics_layer_0/polygon_0/one_way = true
 19:11/0 = 0
 19:12/0 = 0
 19:13/0 = 0
@@ -539,116 +543,74 @@ separation = Vector2i(1, 1)
 11:6/0 = 0
 11:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_wfi5k"]
+[sub_resource type="TileSet" id="TileSet_3cahp"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_6issp")
 
-[sub_resource type="Curve2D" id="Curve2D_8w0pe"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_7eb4w"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_hadiw"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 158, -176, 0, 0, 0, 0, 7, 11)
-}
-point_count = 2
-
-[node name="Level3" type="Node2D"]
-script = ExtResource("1_6nmes")
-levelNO = 3
-
-[node name="Label" type="Label" parent="."]
-offset_left = 1406.0
-offset_top = 33.0
-offset_right = 1577.0
-offset_bottom = 75.0
-theme_override_font_sizes/font_size = 8
-text = "باید بری سکه های قبلو جمع کنی تا در باز بشه
-همینجوری که نیست
-رگ اصفهانیت کجا رفته پس"
-horizontal_alignment = 1
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_vnf24")
+levelNO = 1
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_wfi5k")
+tile_set = SubResource("TileSet_3cahp")
 format = 2
-layer_0/tile_data = PackedInt32Array(1048599, 524288, 4, 1048600, 524288, 4, 1048601, 524288, 4, 1048602, 524288, 4, 1048603, 524288, 4, 1048604, 524288, 4, 1048605, 524288, 4, 1048606, 524288, 4, 1048607, 524288, 4, 1048611, 524288, 4, 1179678, 524288, 6, 1179677, 524288, 6, 1179676, 524288, 6, 1114140, 524288, 5, 1114139, 524288, 5, 1114138, 524288, 5, 1114137, 524288, 5, 1114136, 524288, 5, 1114135, 524288, 5, 1114134, 524288, 5, 1114141, 524288, 5, 1114142, 524288, 5, 1179675, 524288, 6, 1179674, 524288, 6, 1179673, 524288, 6, 1179672, 524288, 6, 1179671, 524288, 6, 1179670, 524288, 6, 1048598, 524288, 4, 1048597, 524288, 4, 1048596, 524288, 4, 1048595, 524288, 5, 1114131, 524288, 5, 1114132, 524288, 5, 1114133, 524288, 5, 1179669, 524288, 6, 1179668, 524288, 6, 1179667, 524288, 6, 1179666, 458752, 6, 1114130, 458752, 5, 1048594, 458752, 5, 983058, 458752, 4, 1048608, 524288, 4, 1048609, 524288, 4, 1114143, 524288, 5, 1114144, 524288, 5, 1179679, 524288, 6, 1048610, 524288, 4, 1114145, 524288, 5, 1179680, 524288, 6, 1114146, 524288, 5, 1179682, 589824, 6, 1179681, 524288, 6, 983085, 655360, 5, 983086, 720896, 5, 983087, 786432, 5, 1179698, 655360, 5, 1179699, 720896, 5, 1179700, 786432, 5, 1048632, 655360, 5, 1048633, 720896, 5, 1048634, 786432, 5, 917566, 655360, 5, 917567, 720896, 5, 917568, 786432, 5, 786500, 655360, 5, 786501, 720896, 5, 786502, 786432, 5, 655434, 655360, 5, 655435, 720896, 5, 655436, 786432, 5, 524368, 655360, 5, 524369, 720896, 5, 524370, 786432, 5, 393302, 655360, 5, 393303, 720896, 5, 393304, 786432, 5, 1048613, 524288, 8, 1048614, 524288, 8, 1048616, 458752, 8, 1048615, 524288, 8, 983059, 589824, 4, 1114147, 589824, 6, 1048612, 589824, 4)
+layer_0/tile_data = PackedInt32Array(786455, 983040, 8, 786456, 1048576, 8, 786457, 1114112, 8)
 
-[node name="HUD" parent="." instance=ExtResource("3_dypo0")]
+[node name="HUD" parent="." instance=ExtResource("3_2eb3b")]
 
-[node name="Player" parent="." instance=ExtResource("4_yveg6")]
-position = Vector2(360, 251)
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kykwg")
+autoplay = true
+parameters/looping = true
+
+[node name="Player" parent="." instance=ExtResource("5_iyn63")]
+position = Vector2(399, 185)
+
+[node name="Door" parent="." instance=ExtResource("6_1ix84")]
+position = Vector2(1481, 199)
+levelNO = 2
+
+[node name="Label" type="Label" parent="Door"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 30.0
+offset_bottom = -6.0
+text = "Level 2"
 
 [node name="Traps" type="Node" parent="."]
 
+[node name="Trap" parent="Traps" instance=ExtResource("7_4x4hb")]
+position = Vector2(563, 176)
+
 [node name="Gems" type="Node" parent="."]
 
-[node name="Gem" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(432, 234)
+[node name="Gem" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(624, 160)
 
-[node name="Gem2" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(496, 234)
+[node name="Gem2" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(680, 152)
 
-[node name="Gem3" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(576, 216)
+[node name="Gem3" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(712, 136)
 
-[node name="Gem4" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(656, 208)
+[node name="Gem4" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(752, 136)
 
-[node name="Gem5" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(797, 213)
+[node name="Gem5" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(856, 184)
 
-[node name="Gem7" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(867, 239)
+[node name="Gem6" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(991, 160)
 
-[node name="Gem8" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(961, 209)
+[node name="Gem7" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(1055, 177)
 
-[node name="Gem9" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(1059, 178)
+[node name="Gem8" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(1104, 184)
 
-[node name="Gem10" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(1153, 145)
-
-[node name="Gem11" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(1254, 114)
-
-[node name="Gem12" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(1342, 86)
-
-[node name="Gem6" parent="Gems" instance=ExtResource("6_4b87s")]
-position = Vector2(763, 287)
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_7eb4w")
-autoplay = true
-
-[node name="MovingSpikes" parent="." instance=ExtResource("8_8w0pe")]
-position = Vector2(522, 263)
-curve = SubResource("Curve2D_8w0pe")
-move_duration = 0.2
-ease_type = 5
-ease_mode = 1
-
-[node name="MovingSpike" parent="." instance=ExtResource("9_7eb4w")]
-position = Vector2(451, 263)
-curve = SubResource("Curve2D_7eb4w")
-move_duration = 0.2
-ease_type = 5
-ease_mode = 1
-
-[node name="MovingTriggered" parent="." instance=ExtResource("10_hadiw")]
-position = Vector2(619, 217)
-curve = SubResource("Curve2D_hadiw")
+[node name="Gem9" parent="Gems" instance=ExtResource("8_fmais")]
+position = Vector2(1168, 192)
 
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
-[connection signal="gem_collected" from="Gems/Gem6" to="." method="_on_gem_6_gem_collected"]
-[connection signal="spike_entered" from="MovingSpikes" to="." method="_on_spike_entered"]
-[connection signal="spike_entered" from="MovingSpike" to="." method="_on_spike_entered"]
+[connection signal="player_entered" from="Door" to="." method="_on_door_player_entered"]
+[connection signal="trap_activated" from="Traps/Trap" to="." method="_on_tale_trap_activated"]

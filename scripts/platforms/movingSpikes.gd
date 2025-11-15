@@ -4,7 +4,7 @@ extends Path2D
 @export var ease_type: Tween.TransitionType = Tween.TRANS_SINE
 @export var ease_mode: Tween.EaseType = Tween.EASE_IN_OUT
 
-signal zzz_entered
+signal spike_entered
 
 @onready var follow: PathFollow2D = $PathFollow2D
 
@@ -28,7 +28,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			follow.progress_ratio = 1.0  # دقیقاً روی آخر
 		)
 
-func _on_zzz_area_body_entered(body: Node2D) -> void:
+func _on_spike_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		zzz_entered.emit()
-		
+		spike_entered.emit()

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cboi8hec4yf0c" path="res://scenes/player.tscn" id="4_g1ckg"]
 [ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="5_t7v7a"]
 [ext_resource type="AudioStream" uid="uid://cmrqivdi2p75i" path="res://assets/4.mp3" id="6_g1ckg"]
-[ext_resource type="PackedScene" uid="uid://dh3flqow8nnd0" path="res://scenes/platforms/movingZZZ.tscn" id="7_f62st"]
+[ext_resource type="PackedScene" uid="uid://dh3flqow8nnd0" path="res://scenes/platforms/movingSpikes.tscn" id="7_f62st"]
 [ext_resource type="PackedScene" uid="uid://3ybr0fh382e" path="res://scenes/jumpPad.tscn" id="7_heu5o"]
 [ext_resource type="PackedScene" uid="uid://cd7guqg431q4v" path="res://scenes/platforms/breaking.tscn" id="8_s45gt"]
 [ext_resource type="PackedScene" uid="uid://clikcsot5ncta" path="res://scenes/door.tscn" id="10_g1ckg"]
@@ -626,15 +626,19 @@ jump_force = 400.0
 position = Vector2(1154, 266)
 jump_force = 600.0
 
-[node name="MovingZZZ" parent="." instance=ExtResource("7_f62st")]
+[node name="MovingSpikes" parent="." instance=ExtResource("7_f62st")]
 position = Vector2(928, 149)
 curve = SubResource("Curve2D_4vryo")
 move_duration = 0.5
+ease_type = 5
+ease_mode = 1
 
-[node name="MovingZZZ2" parent="." instance=ExtResource("7_f62st")]
+[node name="MovingSpikes2" parent="." instance=ExtResource("7_f62st")]
 position = Vector2(978, 149)
 curve = SubResource("Curve2D_g1ckg")
 move_duration = 0.5
+ease_type = 5
+ease_mode = 1
 
 [node name="Door" parent="." instance=ExtResource("10_g1ckg")]
 position = Vector2(1034, 136)
@@ -647,6 +651,6 @@ offset_bottom = -9.0
 text = "Finish"
 
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
-[connection signal="zzz_entered" from="MovingZZZ" to="." method="_on_moving_zzz_zzz_entered"]
-[connection signal="zzz_entered" from="MovingZZZ2" to="." method="_on_moving_zzz_zzz_entered"]
+[connection signal="spike_entered" from="MovingSpikes" to="." method="_on_spike_entered"]
+[connection signal="spike_entered" from="MovingSpikes2" to="." method="_on_spike_entered"]
 [connection signal="player_entered" from="Door" to="." method="_on_door_finish_player_entered"]

@@ -42,7 +42,7 @@ func _on_door_player_entered(level):
 func _on_door_2_player_entered(level: Variant) -> void:
 	death()
 
-func _on_moving_zzz_zzz_entered() -> void:
+func _on_spike_entered() -> void:
 	death()
 
 func _input(event):
@@ -63,7 +63,3 @@ func _on_door_finish_player_entered(level: Variant) -> void:
 func _on_gem_6_gem_collected() -> void:
 	Global.lvl3score -= 1
 	get_tree().change_scene_to_file("res://scenes/levels/level4.tscn")
-
-
-func _on_moving_zzz_2_zzz_entered() -> void:
-	death()

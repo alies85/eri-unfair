@@ -19,12 +19,10 @@ func _physics_process(delta):
 		progress = 0.0
 		direction = 1
 
-	# 🔸 ease-in-out واقعی:
 	var eased = ease_in_out(progress, ease_strength)
 	follower.progress_ratio = eased
 
 
-# تابع سفارشی ease-in-out
 func ease_in_out(t: float, strength: float) -> float:
 	if t < 0.5:
 		return 0.5 * ease(t * 2.0, strength)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ci44yfmvmjblp"]
 
-[ext_resource type="Script" uid="uid://bcaoeonhyrtw5" path="res://scripts/platforms/movingZZZ.gd" id="1_rhoqt"]
+[ext_resource type="Script" uid="uid://bcaoeonhyrtw5" path="res://scripts/platforms/movingSpikes.gd" id="1_rhoqt"]
 [ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_rxm0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7efg"]
@@ -27,7 +27,7 @@ animations = [{
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_737gm"]
 a = Vector2(0, -112)
 
-[node name="MovingZZZ" type="Path2D"]
+[node name="MovingSpike" type="Path2D"]
 script = ExtResource("1_rhoqt")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
@@ -41,9 +41,9 @@ sync_to_physics = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_y7efg")
 
-[node name="ZZZArea" type="Area2D" parent="PathFollow2D/AnimatableBody2D"]
+[node name="SpikeArea" type="Area2D" parent="PathFollow2D/AnimatableBody2D"]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="PathFollow2D/AnimatableBody2D/ZZZArea"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PathFollow2D/AnimatableBody2D/SpikeArea"]
 shape = SubResource("RectangleShape2D_ifor5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/AnimatableBody2D"]
@@ -57,5 +57,5 @@ sprite_frames = SubResource("SpriteFrames_5d5e3")
 position = Vector2(-17, -12)
 shape = SubResource("SegmentShape2D_737gm")
 
-[connection signal="body_entered" from="PathFollow2D/AnimatableBody2D/ZZZArea" to="." method="_on_zzz_area_body_entered"]
+[connection signal="body_entered" from="PathFollow2D/AnimatableBody2D/SpikeArea" to="." method="_on_spike_area_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
