@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgduumu18n3as"]
+[gd_scene load_steps=12 format=3 uid="uid://crn62kixbf2m4"]
 
 [ext_resource type="Script" uid="uid://dgjlcnkx2hkfr" path="res://scripts/level.gd" id="1_vnf24"]
 [ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_pm1y0"]
@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://clikcsot5ncta" path="res://scenes/door.tscn" id="6_1ix84"]
 [ext_resource type="PackedScene" uid="uid://cacvqaafnb5ed" path="res://scenes/trap.tscn" id="7_4x4hb"]
 [ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="8_fmais"]
+[ext_resource type="PackedScene" uid="uid://byv8palf5pbag" path="res://scenes/shuttle.tscn" id="9_v0vb7"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6issp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v0vb7"]
 resource_name = "Tilemap"
 texture = ExtResource("2_pm1y0")
 separation = Vector2i(1, 1)
@@ -545,7 +546,7 @@ separation = Vector2i(1, 1)
 
 [sub_resource type="TileSet" id="TileSet_3cahp"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_6issp")
+sources/0 = SubResource("TileSetAtlasSource_v0vb7")
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_vnf24")
@@ -554,7 +555,7 @@ levelNO = 1
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3cahp")
 format = 2
-layer_0/tile_data = PackedInt32Array(786455, 983040, 8, 786456, 1048576, 8, 786457, 1114112, 8)
+layer_0/tile_data = PackedInt32Array(458766, 983040, 5, 524302, 983040, 6, 589838, 983040, 6, 655374, 983040, 6, 720910, 983040, 6, 786446, 983040, 6, 851982, 983040, 6, 917518, 983040, 6, 983054, 983040, 6, 1048590, 983040, 6, 1114126, 983040, 7, 1114127, 1048576, 7, 1114128, 1048576, 7, 1114129, 1048576, 7, 1114130, 1048576, 7, 1114131, 1048576, 7, 1114132, 1048576, 7, 1114133, 1048576, 7, 1114134, 1048576, 7, 1114135, 1048576, 7, 1114136, 1048576, 7, 1114137, 1048576, 7, 1114138, 1048576, 7, 1114139, 1048576, 7, 458767, 1114112, 5, 524303, 1114112, 6, 589839, 1114112, 6, 655375, 1114112, 6, 720911, 1114112, 6, 786448, 1048576, 5, 786449, 1048576, 5, 786450, 1048576, 5, 786451, 1048576, 5, 786452, 1048576, 5, 786453, 1048576, 5, 786454, 1048576, 5, 786455, 1048576, 5, 786456, 1048576, 5, 786457, 1048576, 5, 786458, 1048576, 5, 786459, 1048576, 5, 786462, 1114112, 5, 917534, 1114112, 6, 983070, 1114112, 6, 1048606, 1114112, 6, 1114142, 1114112, 7, 1114140, 1048576, 7, 1114141, 1048576, 7, 786461, 1048576, 5, 786460, 1048576, 5, 851998, 1114112, 6)
 
 [node name="HUD" parent="." instance=ExtResource("3_2eb3b")]
 
@@ -564,7 +565,7 @@ autoplay = true
 parameters/looping = true
 
 [node name="Player" parent="." instance=ExtResource("5_iyn63")]
-position = Vector2(399, 185)
+position = Vector2(288, 184)
 
 [node name="Door" parent="." instance=ExtResource("6_1ix84")]
 position = Vector2(1481, 199)
@@ -610,6 +611,9 @@ position = Vector2(1104, 184)
 
 [node name="Gem9" parent="Gems" instance=ExtResource("8_fmais")]
 position = Vector2(1168, 192)
+
+[node name="Shuttle" parent="." instance=ExtResource("9_v0vb7")]
+position = Vector2(400, 192)
 
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
 [connection signal="player_entered" from="Door" to="." method="_on_door_player_entered"]
