@@ -58,3 +58,8 @@ func _physics_process(delta):
 		fell_into_void.emit()
 
 	move_and_slide()
+
+
+func _on_gravity_change() -> void:
+	JUMP_VELOCITY = -200
+	gravity = 350

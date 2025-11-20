@@ -1,7 +1,7 @@
 extends Node
 
 var score = 0
-var currentLevel = 5
+var currentLevel = 6
 var lvl3score = 0
 
 func _ready():

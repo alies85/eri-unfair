@@ -1,8 +1,13 @@
 extends Node2D
 
+signal gravityChange
+
 @export var levelNO = 0
 
 func _ready():
+	if levelNO >= 6:
+		gravityChange.emit()
+	
 	$HUD.level(levelNO)
 	Global.currentLevel = levelNO
 	

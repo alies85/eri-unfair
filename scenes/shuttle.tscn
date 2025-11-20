@@ -1,8 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://byv8palf5pbag"]
+[gd_scene load_steps=38 format=3 uid="uid://byv8palf5pbag"]
 
 [ext_resource type="Script" uid="uid://csuhpk8s8x8ul" path="res://scripts/shuttle.gd" id="1_8l71w"]
 [ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_js0s6"]
 [ext_resource type="Texture2D" uid="uid://dgnnruqpusokn" path="res://assets/particles.png" id="3_yf4si"]
+[ext_resource type="AudioStream" uid="uid://p1hnqboplvd" path="res://assets/rocket-launch.mp3" id="4_8r8kg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbxv8"]
 size = Vector2(16, 16)
@@ -229,7 +230,7 @@ gradient = SubResource("Gradient_r7bfu")
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -10, 0)
 emission_shape = 3
-emission_box_extents = Vector3(37, 1, 1)
+emission_box_extents = Vector3(5, 10, 1)
 velocity_pivot = Vector3(200, 200, 0)
 spread = 60.0
 angular_velocity_min = -60.000015
@@ -238,6 +239,8 @@ gravity = Vector3(0, 500, 0)
 scale_min = 0.5
 scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_t0i51")
+hue_variation_min = 0.20999998
+hue_variation_max = 0.20999998
 anim_offset_max = 1.0
 
 [node name="BreakingPlatform" type="StaticBody2D"]
@@ -329,18 +332,18 @@ visible = false
 position = Vector2(0, -52)
 shape = SubResource("RectangleShape2D_2y41l")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_0mr27")
+position = Vector2(0, 10)
 emitting = false
 amount = 50
 texture = ExtResource("3_yf4si")
-one_shot = true
-explosiveness = 1.0
-visibility_rect = Rect2(-10, -10, 20, 20)
+lifetime = 0.3
+explosiveness = 0.5
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_07q4l")
 
+[node name="vfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8r8kg")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

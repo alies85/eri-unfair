@@ -1,16 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://crn62kixbf2m4"]
+[gd_scene load_steps=12 format=3 uid="uid://d3w87o7vg2fbq"]
 
-[ext_resource type="Script" uid="uid://dgjlcnkx2hkfr" path="res://scripts/level.gd" id="1_vnf24"]
-[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_pm1y0"]
-[ext_resource type="PackedScene" uid="uid://bdyp538fqygcq" path="res://scenes/hud.tscn" id="3_2eb3b"]
-[ext_resource type="AudioStream" uid="uid://cxoidqjb5kyw2" path="res://assets/background.mp3" id="4_kykwg"]
-[ext_resource type="PackedScene" uid="uid://cboi8hec4yf0c" path="res://scenes/player.tscn" id="5_iyn63"]
-[ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="8_fmais"]
-[ext_resource type="PackedScene" uid="uid://byv8palf5pbag" path="res://scenes/shuttle.tscn" id="9_v0vb7"]
+[ext_resource type="Script" uid="uid://dgjlcnkx2hkfr" path="res://scripts/level.gd" id="1_rkkp2"]
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_6x3xw"]
+[ext_resource type="PackedScene" uid="uid://bdyp538fqygcq" path="res://scenes/hud.tscn" id="3_wrd1n"]
+[ext_resource type="AudioStream" uid="uid://cxoidqjb5kyw2" path="res://assets/background.mp3" id="4_2rkt7"]
+[ext_resource type="PackedScene" uid="uid://cboi8hec4yf0c" path="res://scenes/player.tscn" id="5_sdnvp"]
+[ext_resource type="PackedScene" uid="uid://clikcsot5ncta" path="res://scenes/door.tscn" id="6_53v2u"]
+[ext_resource type="PackedScene" uid="uid://cacvqaafnb5ed" path="res://scenes/trap.tscn" id="7_3mgnq"]
+[ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="8_uc8rk"]
+[ext_resource type="PackedScene" uid="uid://byv8palf5pbag" path="res://scenes/shuttle.tscn" id="9_hseji"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v0vb7"]
 resource_name = "Tilemap"
-texture = ExtResource("2_pm1y0")
+texture = ExtResource("2_6x3xw")
 separation = Vector2i(1, 1)
 1:0/0 = 0
 2:0/0 = 0
@@ -546,147 +548,76 @@ separation = Vector2i(1, 1)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_v0vb7")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nfihu"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(119, 238, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lgguw"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(119, 272, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_v1pya"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nfihu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lgguw")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ps2vj"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(136, 238, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sbmf2"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(136, 272, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qsj6i"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ps2vj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sbmf2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7tkf"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(136, 255, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4fww7"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(136, 289, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_dju2a"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g7tkf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4fww7")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrfo0"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(119, 255, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_db1r7"]
-atlas = ExtResource("2_pm1y0")
-region = Rect2(119, 289, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_v0vb7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrfo0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_db1r7")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[node name="Level5" type="Node2D"]
-script = ExtResource("1_vnf24")
-levelNO = 5
+[node name="Level6" type="Node2D"]
+script = ExtResource("1_rkkp2")
+levelNO = 6
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3cahp")
 format = 2
-layer_0/tile_data = PackedInt32Array(458766, 983040, 5, 524302, 983040, 6, 589838, 983040, 6, 655374, 983040, 6, 720910, 983040, 6, 786446, 983040, 6, 851982, 983040, 6, 917518, 983040, 6, 983054, 983040, 6, 1048590, 983040, 6, 1114126, 983040, 7, 1114127, 1048576, 7, 1114128, 1048576, 7, 1114129, 1048576, 7, 1114130, 1048576, 7, 1114131, 1048576, 7, 1114132, 1048576, 7, 1114133, 1048576, 7, 1114134, 1048576, 7, 1114135, 1048576, 7, 1114136, 1048576, 7, 1114137, 1048576, 7, 1114138, 1048576, 7, 1114139, 1048576, 7, 458767, 1114112, 5, 524303, 1114112, 6, 589839, 1114112, 6, 655375, 1114112, 6, 720911, 1114112, 6, 786448, 1048576, 5, 786449, 1048576, 5, 786450, 1048576, 5, 786451, 1048576, 5, 786452, 1048576, 5, 786453, 1048576, 5, 786454, 1048576, 5, 786455, 1048576, 5, 786456, 1048576, 5, 786457, 1048576, 5, 786458, 1048576, 5, 786459, 1048576, 5, 786462, 1114112, 5, 917534, 1114112, 6, 983070, 1114112, 6, 1048606, 1114112, 6, 1114142, 1114112, 7, 1114140, 1048576, 7, 1114141, 1048576, 7, 786461, 1048576, 5, 786460, 1048576, 5, 851998, 1114112, 6, -327643, 917504, 6, -524257, 917504, 6, -655326, 917504, 5, -720858, 917504, 6, -1114079, 917504, 7, -983010, 917504, 6, -983017, 917504, 5, -393180, 917504, 5, -393182, 917504, 5, -589794, 917504, 5, -524254, 917504, 7, -393179, 917504, 5, -262107, 917504, 7, -786406, 917504, 5, -720867, 917504, 6, -786401, 917504, 5, -786411, 917504, 5, -393203, 917504, 5, -786415, 917504, 6, -983022, 917504, 5, -917485, 917504, 6, -983018, 917504, 5, -983014, 917504, 6, -917478, 917504, 7, -983011, 917504, 6, -786397, 917504, 6, -720861, 917504, 7, -1048542, 917504, 5, -1048541, 917504, 5, -917468, 917504, 7, -851932, 917504, 5, -786396, 917504, 6, -983007, 917504, 6, -1179614, 917504, 6, -1114078, 917504, 7, -1179613, 917504, 6, -1114077, 917504, 7, -1179611, 917504, 6, -1114075, 917504, 7, -1048539, 917504, 5, -1048546, 917504, 5, -1245152, 917504, 5, -1048547, 917504, 5, -1245157, 917504, 5, -1245158, 917504, 5, -1114086, 917504, 7, -1114088, 917504, 7, -1245163, 917504, 5, -1245164, 917504, 5, -1179628, 917504, 6, -1245165, 917504, 5, -1179633, 917504, 6, -1114097, 917504, 7, -1245170, 917504, 5, -917489, 917504, 7, -1245171, 917504, 5, -1179635, 917504, 6, -1114099, 917504, 7, -458735, 65536, 1, -720881, 65536, 1, -720877, 131072, 1, -589788, 131072, 1, -983009, 131072, 1, -1245167, 131072, 1, -327658, 131072, 1, -327647, 65536, 1, -1638384, 917504, 6, -1572843, 917504, 6, -1507297, 917504, 6, -1441758, 917504, 6, -1703900, 917504, 6, -1769436, 917504, 6, -1834974, 917504, 6, -1703909, 917504, 6, -2097134, 917504, 6, -1834994, 917504, 6, -2162674, 917504, 6, -2162661, 917504, 6, -1966065, 917504, 6, -2031601, 917504, 6, -2293741, 917504, 6, -1966051, 917504, 6, -2031596, 917504, 6, -2097132, 917504, 6, -2490350, 917504, 6, -2490349, 917504, 6, -2359262, 917504, 6, -2359261, 917504, 6, -2031574, 917504, 6, -1703895, 917504, 6, -1638360, 917504, 6, -1572824, 917504, 6, -1572825, 917504, 6, -1507294, 917504, 6, -1507295, 917504, 6, -1769443, 917504, 6, -2031583, 917504, 6, -2031584, 917504, 6, -2228190, 917504, 6, -1507310, 917504, 6, -1441774, 917504, 6, -1769460, 917504, 6, -1834996, 917504, 6, -2162671, 917504, 6, -2293737, 917504, 6, -2293732, 917504, 6, -1769455, 917504, 6, -1572850, 917504, 6, -1638386, 917504, 6, -1703922, 917504, 6, -2293748, 917504, 6)
+layer_0/tile_data = PackedInt32Array(589841, 1048576, 5, 589842, 1048576, 5, 589843, 1048576, 5, 589844, 1048576, 5, 589845, 1048576, 5, 589846, 1048576, 5, 589847, 1048576, 5, 589848, 1048576, 5, 589849, 1048576, 5, 589850, 1048576, 5, 589851, 1048576, 5, 589840, 1048576, 5)
 
-[node name="HUD" parent="." instance=ExtResource("3_2eb3b")]
+[node name="HUD" parent="." instance=ExtResource("3_wrd1n")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_kykwg")
+stream = ExtResource("4_2rkt7")
 autoplay = true
 parameters/looping = true
 
-[node name="Player" parent="." instance=ExtResource("5_iyn63")]
-position = Vector2(288, 184)
+[node name="Player" parent="." instance=ExtResource("5_sdnvp")]
+position = Vector2(223, 368)
 
-[node name="Shuttle" parent="." node_paths=PackedStringArray("levelMusic") instance=ExtResource("9_v0vb7")]
-position = Vector2(452, 192)
-next_level = 6
-move_duration = 10.0
-levelMusic = NodePath("../Music")
+[node name="Door" parent="." instance=ExtResource("6_53v2u")]
+position = Vector2(1481, 199)
+levelNO = 2
 
-[node name="Fan" type="Node" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Fan"]
-position = Vector2(360, 104)
-sprite_frames = SubResource("SpriteFrames_v1pya")
-autoplay = "default"
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Fan"]
-position = Vector2(376, 104)
-sprite_frames = SubResource("SpriteFrames_qsj6i")
-autoplay = "default"
-
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Fan"]
-position = Vector2(376, 120)
-sprite_frames = SubResource("SpriteFrames_dju2a")
-autoplay = "default"
-
-[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Fan"]
-position = Vector2(360, 120)
-sprite_frames = SubResource("SpriteFrames_v0vb7")
-autoplay = "default"
+[node name="Label" type="Label" parent="Door"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 30.0
+offset_bottom = -6.0
+text = "Level 2"
 
 [node name="Traps" type="Node" parent="."]
 
+[node name="Trap" parent="Traps" instance=ExtResource("7_3mgnq")]
+position = Vector2(563, 176)
+
 [node name="Gems" type="Node" parent="."]
 
-[node name="Gem13" parent="Gems" instance=ExtResource("8_fmais")]
-position = Vector2(365, 159)
+[node name="Gem" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(606, 78)
 
+[node name="Gem2" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(730, 62)
+
+[node name="Gem3" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(683, 127)
+
+[node name="Gem4" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(729, 112)
+
+[node name="Gem5" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(856, 184)
+
+[node name="Gem6" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(991, 160)
+
+[node name="Gem7" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(1055, 177)
+
+[node name="Gem8" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(1104, 184)
+
+[node name="Gem9" parent="Gems" instance=ExtResource("8_uc8rk")]
+position = Vector2(1168, 192)
+
+[node name="Shuttle" parent="." instance=ExtResource("9_hseji")]
+position = Vector2(223, 429)
+next_level = -1
+idle_duration = 0.0
+
+[connection signal="gravityChange" from="." to="Player" method="_on_gravity_change"]
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
-[connection signal="finished" from="Shuttle" to="." method="_on_door_player_entered"]
+[connection signal="player_entered" from="Door" to="." method="_on_door_player_entered"]
+[connection signal="trap_activated" from="Traps/Trap" to="." method="_on_tale_trap_activated"]
