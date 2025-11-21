@@ -29,7 +29,6 @@ func death():
 
 func _on_gem_collected():
 	Global.score += 1
-	ShopData.add_gems(1)
 	if levelNO == 3:
 		Global.lvl3score += 1
 		if Global.lvl3score >= 11:

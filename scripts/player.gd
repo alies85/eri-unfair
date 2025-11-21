@@ -27,13 +27,13 @@ func _ready():
 func apply_powerups():
 	# Apply speed boost only if equipped
 	if ShopData.is_equipped("speed_boost"):
-		SPEED = 225.0  # 150 * 1.5
+		SPEED = 100.0  # 150 / 1.5
 	else:
 		SPEED = 150.0
 	
 	# Apply jump boost only if equipped
 	if ShopData.is_equipped("jump_boost"):
-		JUMP_VELOCITY = -390.0  # -300 * 1.3
+		JUMP_VELOCITY = -230.0  # -300 / 1.3
 	else:
 		JUMP_VELOCITY = -300.0
 	

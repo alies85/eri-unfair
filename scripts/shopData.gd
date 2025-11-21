@@ -24,22 +24,15 @@ var shop_items = {
 }
 
 # Player data
-var total_gems = 0
 var purchased_items = []
 var equipped_items = {}  # Dictionary of item_id -> true for equipped items
 
 const SAVE_PATH = "user://shopdata.save"
 
-# For testing: Set to true to start with test gems
-const DEBUG_MODE = false
-const DEBUG_GEMS = 50
-
 func _ready():
 	load_data()
-	# For testing: Give starting gems if debug mode is enabled
-	if DEBUG_MODE and total_gems == 0:
-		total_gems = DEBUG_GEMS
-		save_data()
+	
+	reset_data()
 
 # Check if item is purchased
 func is_purchased(item_id: String) -> bool:
@@ -51,17 +44,12 @@ func is_equipped(item_id: String) -> bool:
 
 # Purchase an item
 func purchase_item(item_id: String, price: int) -> bool:
-	if total_gems >= price and not is_purchased(item_id):
-		total_gems -= price
+	if Global.score >= price and not is_purchased(item_id):
+		Global.score -= price
 		purchased_items.append(item_id)
 		save_data()
 		return true
 	return false
-
-# Add gems
-func add_gems(amount: int):
-	total_gems += amount
-	save_data()
 
 # Get item by id
 func get_item_by_id(item_id: String) -> Dictionary:
@@ -115,7 +103,6 @@ func save_data():
 	var save_file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if save_file:
 		var data = {
-			"total_gems": total_gems,
 			"purchased_items": purchased_items,
 			"equipped_items": equipped_items
 		}
@@ -134,7 +121,6 @@ func load_data():
 			var parse_result = json.parse(json_string)
 			if parse_result == OK:
 				var data = json.data
-				total_gems = data.get("total_gems", 0)
 				purchased_items = data.get("purchased_items", [])
 				
 				# Handle both old and new equipped_items format
@@ -159,7 +145,6 @@ func load_data():
 
 # Reset shop data (useful for testing)
 func reset_data():
-	total_gems = 0
 	purchased_items = []
 	equipped_items = {}
 	save_data()

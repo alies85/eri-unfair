@@ -24,7 +24,7 @@ func _ready():
 	$TabContainer/Powers.grab_focus()
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("open_shop"):
 		_on_close_pressed()
 		get_viewport().set_input_as_handled()
 
@@ -45,7 +45,7 @@ func _on_my_items_tab_pressed():
 	show_my_items_tab()
 
 func update_gem_display():
-	$GemCounter.text = "الماس: " + str(ShopData.total_gems)
+	$GemCounter.text = "الماس: " + str(Global.score)
 
 func update_items_display():
 	# Clear existing items
@@ -100,6 +100,7 @@ func _on_buy_button_pressed(item: Dictionary):
 		# Success
 		update_gem_display()
 		update_items_display()
+		ShopData.equip_item(item["id"])
 		show_message("خرید با موفقیت انجام شد!")
 	else:
 		# Failed
@@ -136,6 +137,13 @@ func _on_back_button_pressed():
 	_on_close_pressed()
 
 func _on_close_pressed():
+	# apply purchases
+	var root = get_tree().root
+	for child in root.get_children():
+		var player = child.find_child("Player")
+		if player:
+			player.apply_powerups()
+			player.apply_cosmetics()
 	# Check if we're in a CanvasLayer (overlay mode)
 	if get_parent() and get_parent() is CanvasLayer and get_parent().name == SHOP_LAYER_NAME:
 		# Free the parent CanvasLayer

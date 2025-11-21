@@ -3,7 +3,7 @@ extends Node
 const SHOP_LAYER_NAME = "ShopLayer"
 const SHOP_SCENE = preload("res://scenes/shop.tscn")
 
-var score = 0
+var score = 200
 var currentLevel = 1
 var lvl3score = 0
 
