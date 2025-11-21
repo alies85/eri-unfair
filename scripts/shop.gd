@@ -50,6 +50,7 @@ func update_gem_display():
 func update_items_display():
 	# Clear existing items
 	for child in $ScrollContainer/ItemsContainer.get_children():
+		$ScrollContainer/ItemsContainer.remove_child(child)
 		child.queue_free()
 	
 	# Don't show items for my_items tab (handled separately)
@@ -161,6 +162,7 @@ func _on_close_pressed():
 func show_my_items_tab():
 	# Clear existing items
 	for child in $ScrollContainer/ItemsContainer.get_children():
+		$ScrollContainer/ItemsContainer.remove_child(child)
 		child.queue_free()
 	
 	# Get all purchased items
@@ -231,7 +233,7 @@ func create_my_item_card(item: Dictionary) -> Control:
 	toggle_button.add_theme_font_size_override("font_size", 18)
 	card.add_child(toggle_button)
 	
-	return card
+	return base_card
 
 func _on_equip_button_pressed(item_id: String):
 	if ShopData.is_equipped(item_id):
