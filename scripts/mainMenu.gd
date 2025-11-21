@@ -1,5 +1,7 @@
 extends Node2D
 
+const SHOP_SCENE = preload("res://scenes/shop.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("MainMenu ready!")
@@ -32,8 +34,7 @@ func _on_shop_button_pressed():
 	layer.name = Global.SHOP_LAYER_NAME
 	
 	# Instance shop as overlay
-	var shop_scene = preload("res://scenes/shop.tscn")
-	var shop = shop_scene.instantiate()
+	var shop = SHOP_SCENE.instantiate()
 	shop.name = "ShopOverlay"
 	
 	# Set pause mode recursively to PROCESS

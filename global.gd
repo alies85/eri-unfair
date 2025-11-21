@@ -1,6 +1,7 @@
 extends Node
 
 const SHOP_LAYER_NAME = "ShopLayer"
+const SHOP_SCENE = preload("res://scenes/shop.tscn")
 
 var score = 0
 var currentLevel = 1
@@ -34,8 +35,7 @@ func _input(event):
 		layer.name = SHOP_LAYER_NAME
 		
 		# Instance shop scene
-		var shop_scene = preload("res://scenes/shop.tscn")
-		var shop = shop_scene.instantiate()
+		var shop = SHOP_SCENE.instantiate()
 		shop.name = "ShopOverlay"
 		
 		# Set pause mode recursively to PROCESS
