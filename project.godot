@@ -18,6 +18,7 @@ config/icon="uid://772ysp0w5r2"
 [autoload]
 
 Global="*res://global.gd"
+ShopData="*res://scripts/shopData.gd"
 
 [display]
 

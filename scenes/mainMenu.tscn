@@ -86,4 +86,5 @@ text = "خروج"
 
 [connection signal="pressed" from="Control/Options/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/Options/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="Control/Options/ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="Control/Options/QuitButton" to="." method="_on_quit_button_pressed"]
