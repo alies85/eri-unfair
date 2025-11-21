@@ -44,12 +44,6 @@ func apply_powerups():
 	has_shield = ShopData.is_equipped("shield")
 	if has_shield:
 		shield_active = true  # Reset shield protection for each level
-	
-	# Apply slow motion if equipped
-	if ShopData.is_equipped("slow_motion"):
-		Engine.time_scale = 0.7
-	else:
-		Engine.time_scale = 1.0
 
 func apply_cosmetics():
 	# Apply skin colors based on equipped skin
@@ -89,7 +83,11 @@ func _physics_process(delta):
 			is_on_ground = false
 	
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		# Apply slow motion if equipped (affects gravity)
+		var time_scale = 1.0
+		if ShopData.is_equipped("slow_motion"):
+			time_scale = 0.7
+		velocity.y += gravity * delta * time_scale
 	
 	# Handle jumping with double jump support
 	if Input.is_action_just_pressed("jump"):

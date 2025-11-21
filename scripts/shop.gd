@@ -151,22 +151,16 @@ func show_my_items_tab():
 		$ScrollContainer/ItemsContainer.add_child(item_card)
 
 func create_my_item_card(item: Dictionary) -> Control:
-	var card = VBoxContainer.new()
-	card.custom_minimum_size = Vector2(150, 200)
+	var base_card = VBoxContainer.new()
+	base_card.custom_minimum_size = Vector2(150, 200)
+	
+	var card = base_card
 	
 	# Add visual styling for equipped items
 	if ShopData.is_equipped(item["id"]):
 		var panel = PanelContainer.new()
-		# Create a StyleBox for the equipped state
-		var style = StyleBoxFlat.new()
-		style.bg_color = Color(0.2, 0.6, 0.3, 0.3)  # Green tint
-		style.border_width_left = 2
-		style.border_width_right = 2
-		style.border_width_top = 2
-		style.border_width_bottom = 2
-		style.border_color = Color(0.3, 0.8, 0.4)  # Green border
-		panel.add_theme_stylebox_override("panel", style)
-		card.add_child(panel)
+		panel.add_theme_stylebox_override("panel", create_equipped_panel_style())
+		base_card.add_child(panel)
 		
 		var inner_card = VBoxContainer.new()
 		panel.add_child(inner_card)
@@ -213,3 +207,14 @@ func _on_equip_button_pressed(item_id: String):
 	
 	# Refresh the display
 	show_my_items_tab()
+
+func create_equipped_panel_style() -> StyleBoxFlat:
+	# Create a StyleBox for the equipped state
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.2, 0.6, 0.3, 0.3)  # Green tint
+	style.border_width_left = 2
+	style.border_width_right = 2
+	style.border_width_top = 2
+	style.border_width_bottom = 2
+	style.border_color = Color(0.3, 0.8, 0.4)  # Green border
+	return style

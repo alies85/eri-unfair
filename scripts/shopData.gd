@@ -108,11 +108,7 @@ func unequip_item(item_id: String) -> bool:
 
 # Get list of equipped items
 func get_equipped_items() -> Array:
-	var items = []
-	for item_id in equipped_items.keys():
-		if equipped_items[item_id]:
-			items.append(item_id)
-	return items
+	return equipped_items.keys()
 
 # Save data to file
 func save_data():

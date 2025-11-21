@@ -9,10 +9,13 @@ var magnet_speed = 150.0
 func _physics_process(delta):
 	# Check if player has gem magnet equipped
 	if ShopData.is_equipped("gem_magnet"):
-		var player = get_tree().get_first_node_in_group("player")
+		# Try to find player node
+		var player = get_node_or_null("/root/Level/Player")
 		if player == null:
-			# Try to find player by name
-			player = get_node_or_null("/root/Level/Player")
+			# Alternative search if level node path is different
+			var level_node = get_tree().current_scene
+			if level_node and level_node.has_node("Player"):
+				player = level_node.get_node("Player")
 		
 		if player:
 			var distance = global_position.distance_to(player.global_position)
