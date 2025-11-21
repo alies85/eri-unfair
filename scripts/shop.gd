@@ -16,7 +16,16 @@ func _ready():
 	$TabContainer/MyItems.pressed.connect(_on_my_items_tab_pressed)
 	
 	# Connect back button
-	$BackButton.pressed.connect(_on_back_button_pressed)
+	if not $BackButton.pressed.is_connected(_on_back_button_pressed):
+		$BackButton.pressed.connect(_on_back_button_pressed)
+	
+	# Grab focus on first tab button
+	$TabContainer/Powers.grab_focus()
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		_on_close_pressed()
+		get_viewport().set_input_as_handled()
 
 func _on_powers_tab_pressed():
 	current_tab = "powers"
@@ -123,12 +132,21 @@ func _hide_message():
 		message_timer = null
 
 func _on_back_button_pressed():
-	# Check if we're running as an overlay
-	if name == "ShopOverlay":
+	_on_close_pressed()
+
+func _on_close_pressed():
+	# Check if we're in a CanvasLayer (overlay mode)
+	if get_parent() and get_parent() is CanvasLayer and get_parent().name == "ShopLayer":
+		# Free the parent CanvasLayer
+		get_parent().queue_free()
+		get_tree().paused = false
+	elif name == "ShopOverlay":
+		# Legacy fallback: direct child of scene
 		queue_free()
 		get_tree().paused = false
 	else:
 		# Fallback to scene change if not overlay
+		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
 
 func show_my_items_tab():

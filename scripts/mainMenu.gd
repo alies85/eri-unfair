@@ -22,13 +22,26 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 
 func _on_shop_button_pressed():
-	# Check if ShopOverlay already exists
-	if get_tree().current_scene.has_node("ShopOverlay"):
+	var root = get_tree().root
+	# Check if ShopLayer already exists
+	if root.has_node("ShopLayer"):
 		return
+	
+	# Create CanvasLayer wrapper
+	var layer = CanvasLayer.new()
+	layer.name = "ShopLayer"
 	
 	# Instance shop as overlay
 	var shop_scene = preload("res://scenes/shop.tscn")
 	var shop = shop_scene.instantiate()
 	shop.name = "ShopOverlay"
-	get_tree().current_scene.call_deferred("add_child", shop)
+	
+	# Set pause mode recursively to PROCESS
+	Global.set_pause_mode_recursive(shop, Node.PROCESS_MODE_ALWAYS)
+	
+	# Add shop to layer, layer to root
+	layer.add_child(shop)
+	root.call_deferred("add_child", layer)
+	
+	# Pause the tree
 	get_tree().paused = true
