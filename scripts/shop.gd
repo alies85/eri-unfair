@@ -231,7 +231,7 @@ func create_my_item_card(item: Dictionary) -> Control:
 	toggle_button.add_theme_font_size_override("font_size", 18)
 	card.add_child(toggle_button)
 	
-	return card
+	return base_card
 
 func _on_equip_button_pressed(item_id: String):
 	if ShopData.is_equipped(item_id):
