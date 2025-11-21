@@ -14,7 +14,7 @@ func generate_hash(solver_group_id: String, private_key: String) -> String:
 func _ready():
 	print("FinishMenu ready!")
 	
-	$ResCode.text = generate_hash(Global.username, "1KW7WRNH")
+	$ResCode.text = generate_hash("", "1KW7WRNH")
 	
 	if !OS.has_feature("pc"):
 		$Options/FullscreenButton.hide()
