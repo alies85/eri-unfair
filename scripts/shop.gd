@@ -50,7 +50,6 @@ func update_gem_display():
 func update_items_display():
 	# Clear existing items
 	for child in $ScrollContainer/ItemsContainer.get_children():
-		$ScrollContainer/ItemsContainer.remove_child(child)
 		child.queue_free()
 	
 	# Don't show items for my_items tab (handled separately)
@@ -162,7 +161,6 @@ func _on_close_pressed():
 func show_my_items_tab():
 	# Clear existing items
 	for child in $ScrollContainer/ItemsContainer.get_children():
-		$ScrollContainer/ItemsContainer.remove_child(child)
 		child.queue_free()
 	
 	# Get all purchased items
