@@ -18,10 +18,10 @@ func _input(event):
 			root.get_node("ShopOverlay").queue_free()
 			get_tree().paused = false
 			return
-		var shop_scene = load("res://scenes/shop.tscn")
+		var shop_scene = preload("res://scenes/shop.tscn")
 		var shop = shop_scene.instantiate()
 		shop.name = "ShopOverlay"
-		shop.set_z_index(100)  # فقط اگر Control باشه
+		shop.set_z_index(100)
+		shop.process_mode = Node.PROCESS_MODE_ALWAYS
 		root.call_deferred("add_child", shop)
-		shop.pause_mode = Node.PAUSE_MODE_PROCESS
 		get_tree().paused = true

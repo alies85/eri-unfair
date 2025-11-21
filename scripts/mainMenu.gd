@@ -22,4 +22,14 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 
 func _on_shop_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/shop.tscn")
+	# Check if ShopOverlay already exists
+	if get_tree().current_scene.has_node("ShopOverlay"):
+		return
+	
+	# Instance shop as overlay
+	var shop_scene = preload("res://scenes/shop.tscn")
+	var shop = shop_scene.instantiate()
+	shop.name = "ShopOverlay"
+	shop.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().current_scene.call_deferred("add_child", shop)
+	get_tree().paused = true

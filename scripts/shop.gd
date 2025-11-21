@@ -3,6 +3,9 @@ extends Control
 var current_tab = "powers"
 
 func _ready():
+	# Set process mode to work when tree is paused
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	update_gem_display()
 	update_items_display()
 	
@@ -120,7 +123,13 @@ func _hide_message():
 		message_timer = null
 
 func _on_back_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
+	# Check if we're running as an overlay
+	if name == "ShopOverlay":
+		queue_free()
+		get_tree().paused = false
+	else:
+		# Fallback to scene change if not overlay
+		get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
 
 func show_my_items_tab():
 	# Clear existing items
