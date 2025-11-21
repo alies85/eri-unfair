@@ -40,10 +40,10 @@ func apply_powerups():
 	# Check double jump
 	has_double_jump = ShopData.is_purchased("double_jump")
 	
-	# Check shield
+	# Check shield - regenerate at start of each level
 	has_shield = ShopData.is_purchased("shield")
 	if has_shield:
-		shield_active = true
+		shield_active = true  # Reset shield protection for each level
 
 func apply_cosmetics():
 	# Apply skin colors
