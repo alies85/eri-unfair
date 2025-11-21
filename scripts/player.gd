@@ -46,7 +46,7 @@ func apply_powerups():
 		shield_active = true  # Reset shield protection for each level
 
 func apply_cosmetics():
-	# Apply skin colors
+	# Apply skin colors based on equipped skin
 	var skin = ShopData.equipped_items.get("skin", "default")
 	if skin == "red_skin" and ShopData.is_purchased("red_skin"):
 		if has_node("AnimatedSprite2D"):
@@ -54,6 +54,10 @@ func apply_cosmetics():
 	elif skin == "blue_skin" and ShopData.is_purchased("blue_skin"):
 		if has_node("AnimatedSprite2D"):
 			$AnimatedSprite2D.modulate = Color(0.5, 0.5, 1.5)
+	else:
+		# Default color
+		if has_node("AnimatedSprite2D"):
+			$AnimatedSprite2D.modulate = Color(1.0, 1.0, 1.0)
 
 func _physics_process(delta):
 	if is_on_floor():

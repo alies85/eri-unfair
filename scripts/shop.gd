@@ -78,17 +78,46 @@ func _on_buy_button_pressed(item: Dictionary):
 		# Success
 		update_gem_display()
 		update_items_display()
+		
+		# Auto-equip cosmetic items when purchased
+		if item["id"] in ["red_skin", "blue_skin"]:
+			ShopData.equip_item(item["id"], "skin")
+		elif item["id"] == "rainbow_trail":
+			ShopData.equip_item(item["id"], "trail")
+		elif item["id"] == "star_particles":
+			ShopData.equip_item(item["id"], "particles")
+		
 		show_message("خرید با موفقیت انجام شد!")
 	else:
 		# Failed
 		show_message("الماس کافی ندارید!")
 
+var message_timer: Timer = null
+
 func show_message(text: String):
 	if has_node("MessageLabel"):
 		$MessageLabel.text = text
 		$MessageLabel.visible = true
-		await get_tree().create_timer(2.0).timeout
+		
+		# Cancel existing timer if any
+		if message_timer and message_timer.timeout.is_connected(_hide_message):
+			message_timer.timeout.disconnect(_hide_message)
+			message_timer.queue_free()
+		
+		# Create new timer
+		message_timer = Timer.new()
+		message_timer.wait_time = 2.0
+		message_timer.one_shot = true
+		add_child(message_timer)
+		message_timer.timeout.connect(_hide_message)
+		message_timer.start()
+
+func _hide_message():
+	if has_node("MessageLabel"):
 		$MessageLabel.visible = false
+	if message_timer:
+		message_timer.queue_free()
+		message_timer = null
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")

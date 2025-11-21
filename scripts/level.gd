@@ -37,10 +37,10 @@ func _on_gem_collected():
 	$HUD.score(Global.score)
 
 func _on_trap_activated():#/////////////////////
-	# Check if player has shield
+	# Check if player has shield protection
 	if $Player.has_shield and $Player.shield_active:
 		$Player.shield_active = false
-		# Visual feedback - player blinks or something
+		# Shield absorbed the hit - no death
 		return
 	death()
 
