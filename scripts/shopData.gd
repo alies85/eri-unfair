@@ -81,6 +81,11 @@ func equip_item(item_id: String) -> bool:
 			for skin_id in ["red_skin", "blue_skin", "green_skin"]:
 				if skin_id != item_id and is_equipped(skin_id):
 					equipped_items.erase(skin_id)
+		
+		if item_id in ["star_particles", "rainbow_trail", "diamond_trail"]:
+			for skin_id in ["star_particles", "rainbow_trail", "diamond_trail"]:
+				if skin_id != item_id and is_equipped(skin_id):
+					equipped_items.erase(skin_id)
 	
 	equipped_items[item_id] = true
 	save_data()

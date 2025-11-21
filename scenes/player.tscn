@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://cboi8hec4yf0c"]
+[gd_scene load_steps=18 format=3 uid="uid://cboi8hec4yf0c"]
 
 [ext_resource type="Script" uid="uid://djrd7f7eccwpa" path="res://scripts/player.gd" id="1_7msvu"]
 [ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_erru1"]
 [ext_resource type="AudioStream" uid="uid://cxsjqbr8qhber" path="res://assets/jump.wav" id="3_brij0"]
-[ext_resource type="Texture2D" uid="uid://yub85rjbhjsg" path="res://assets/logo-ramzinex-brokeryab.png" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("2_erru1")
@@ -99,8 +98,8 @@ offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1)
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.65, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0.5, 0, 0.5, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
-atlas = ExtResource("4_dqkch")
-region = Rect2(6, 7, 64, 41)
+atlas = ExtResource("2_erru1")
+region = Rect2(38, 56, 8, 6)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_erru1")
@@ -155,28 +154,10 @@ spread = 180.0
 gravity = Vector2(0, 30)
 initial_velocity_min = 15.0
 initial_velocity_max = 30.0
-scale_amount_min = 0.4
-scale_amount_max = 0.4
+scale_amount_min = 0.6
+scale_amount_max = 0.6
 scale_amount_curve = SubResource("Curve_scale_down")
 color = Color(0.7, 0.9, 1, 1)
-
-[node name="RamzinexTrail" type="CPUParticles2D" parent="."]
-show_behind_parent = true
-emitting = false
-amount = 25
-texture = SubResource("AtlasTexture_qlg0r")
-lifetime = 0.6
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 30)
-initial_velocity_min = 293.35
-initial_velocity_max = 633.56
-scale_amount_min = 0.1
-scale_amount_max = 0.1
-scale_amount_curve = SubResource("Curve_scale_down")
-split_scale = true
-scale_curve_x = null
-scale_curve_y = null
 
 [node name="StarParticles" type="CPUParticles2D" parent="."]
 show_behind_parent = true
