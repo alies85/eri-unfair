@@ -32,8 +32,16 @@ var equipped_items = {
 
 const SAVE_PATH = "user://shopdata.save"
 
+# For testing: Set to true to start with test gems
+const DEBUG_MODE = false
+const DEBUG_GEMS = 50
+
 func _ready():
 	load_data()
+	# For testing: Give starting gems if debug mode is enabled
+	if DEBUG_MODE and total_gems == 0:
+		total_gems = DEBUG_GEMS
+		save_data()
 
 # Check if item is purchased
 func is_purchased(item_id: String) -> bool:
@@ -98,3 +106,14 @@ func load_data():
 					"trail": "none",
 					"particles": "none"
 				})
+
+# Reset shop data (useful for testing)
+func reset_data():
+	total_gems = 0
+	purchased_items = []
+	equipped_items = {
+		"skin": "default",
+		"trail": "none",
+		"particles": "none"
+	}
+	save_data()
