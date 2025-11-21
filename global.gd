@@ -1,5 +1,7 @@
 extends Node
 
+const SHOP_LAYER_NAME = "ShopLayer"
+
 var score = 0
 var currentLevel = 1
 var lvl3score = 0
@@ -21,18 +23,18 @@ func _input(event):
 	if event.is_action_pressed("open_shop"):
 		var root = get_tree().root
 		# Check if ShopLayer already exists
-		if root.has_node("ShopLayer"):
-			var layer = root.get_node("ShopLayer")
+		if root.has_node(SHOP_LAYER_NAME):
+			var layer = root.get_node(SHOP_LAYER_NAME)
 			layer.queue_free()
 			get_tree().paused = false
 			return
 		
 		# Create CanvasLayer wrapper
 		var layer = CanvasLayer.new()
-		layer.name = "ShopLayer"
+		layer.name = SHOP_LAYER_NAME
 		
 		# Instance shop scene
-		var shop_scene = load("res://scenes/shop.tscn")
+		var shop_scene = preload("res://scenes/shop.tscn")
 		var shop = shop_scene.instantiate()
 		shop.name = "ShopOverlay"
 		

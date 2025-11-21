@@ -24,12 +24,12 @@ func _on_quit_button_pressed():
 func _on_shop_button_pressed():
 	var root = get_tree().root
 	# Check if ShopLayer already exists
-	if root.has_node("ShopLayer"):
+	if root.has_node(Global.SHOP_LAYER_NAME):
 		return
 	
 	# Create CanvasLayer wrapper
 	var layer = CanvasLayer.new()
-	layer.name = "ShopLayer"
+	layer.name = Global.SHOP_LAYER_NAME
 	
 	# Instance shop as overlay
 	var shop_scene = preload("res://scenes/shop.tscn")

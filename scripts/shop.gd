@@ -1,5 +1,7 @@
 extends Control
 
+const SHOP_LAYER_NAME = "ShopLayer"
+
 var current_tab = "powers"
 
 func _ready():
@@ -15,9 +17,8 @@ func _ready():
 	$TabContainer/Customization.pressed.connect(_on_customization_tab_pressed)
 	$TabContainer/MyItems.pressed.connect(_on_my_items_tab_pressed)
 	
-	# Connect back button
-	if not $BackButton.pressed.is_connected(_on_back_button_pressed):
-		$BackButton.pressed.connect(_on_back_button_pressed)
+	# Connect back button (connection is idempotent in Godot 4)
+	$BackButton.pressed.connect(_on_back_button_pressed)
 	
 	# Grab focus on first tab button
 	$TabContainer/Powers.grab_focus()
@@ -136,7 +137,7 @@ func _on_back_button_pressed():
 
 func _on_close_pressed():
 	# Check if we're in a CanvasLayer (overlay mode)
-	if get_parent() and get_parent() is CanvasLayer and get_parent().name == "ShopLayer":
+	if get_parent() and get_parent() is CanvasLayer and get_parent().name == SHOP_LAYER_NAME:
 		# Free the parent CanvasLayer
 		get_parent().queue_free()
 		get_tree().paused = false
