@@ -31,7 +31,7 @@ func update_gem_display():
 
 func update_items_display():
 	# Clear existing items
-	for child in $ItemsContainer.get_children():
+	for child in $ScrollContainer/ItemsContainer.get_children():
 		child.queue_free()
 	
 	# Get items for current tab
@@ -40,7 +40,7 @@ func update_items_display():
 	# Create item cards
 	for item in items:
 		var item_card = create_item_card(item)
-		$ItemsContainer.add_child(item_card)
+		$ScrollContainer/ItemsContainer.add_child(item_card)
 
 func create_item_card(item: Dictionary) -> Control:
 	var card = VBoxContainer.new()
