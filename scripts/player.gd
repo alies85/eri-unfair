@@ -25,39 +25,57 @@ func _ready():
 	apply_cosmetics()
 
 func apply_powerups():
-	# Apply speed boost
-	if ShopData.is_purchased("speed_boost"):
-		SPEED = 300.0
+	# Apply speed boost only if equipped
+	if ShopData.is_equipped("speed_boost"):
+		SPEED = 225.0  # 150 * 1.5
 	else:
 		SPEED = 150.0
 	
-	# Apply jump boost
-	if ShopData.is_purchased("jump_boost"):
-		JUMP_VELOCITY = -400.0
+	# Apply jump boost only if equipped
+	if ShopData.is_equipped("jump_boost"):
+		JUMP_VELOCITY = -390.0  # -300 * 1.3
 	else:
 		JUMP_VELOCITY = -300.0
 	
-	# Check double jump
-	has_double_jump = ShopData.is_purchased("double_jump")
+	# Check double jump only if equipped
+	has_double_jump = ShopData.is_equipped("double_jump")
 	
-	# Check shield - regenerate at start of each level
-	has_shield = ShopData.is_purchased("shield")
+	# Check shield - regenerate at start of each level only if equipped
+	has_shield = ShopData.is_equipped("shield")
 	if has_shield:
 		shield_active = true  # Reset shield protection for each level
+	
+	# Apply slow motion if equipped
+	if ShopData.is_equipped("slow_motion"):
+		Engine.time_scale = 0.7
+	else:
+		Engine.time_scale = 1.0
 
 func apply_cosmetics():
 	# Apply skin colors based on equipped skin
-	var skin = ShopData.equipped_items.get("skin", "default")
-	if skin == "red_skin" and ShopData.is_purchased("red_skin"):
+	if ShopData.is_equipped("red_skin"):
 		if has_node("AnimatedSprite2D"):
 			$AnimatedSprite2D.modulate = Color(1.5, 0.5, 0.5)
-	elif skin == "blue_skin" and ShopData.is_purchased("blue_skin"):
+	elif ShopData.is_equipped("blue_skin"):
 		if has_node("AnimatedSprite2D"):
 			$AnimatedSprite2D.modulate = Color(0.5, 0.5, 1.5)
+	elif ShopData.is_equipped("green_skin"):
+		if has_node("AnimatedSprite2D"):
+			$AnimatedSprite2D.modulate = Color(0.5, 1.5, 0.5)
 	else:
 		# Default color
 		if has_node("AnimatedSprite2D"):
 			$AnimatedSprite2D.modulate = Color(1.0, 1.0, 1.0)
+	
+	# Toggle particle effects based on equipped state
+	if has_node("RainbowTrail"):
+		$RainbowTrail.emitting = ShopData.is_equipped("rainbow_trail")
+	
+	if has_node("DiamondTrail"):
+		$DiamondTrail.emitting = ShopData.is_equipped("diamond_trail")
+	
+	if has_node("StarParticles"):
+		$StarParticles.emitting = ShopData.is_equipped("star_particles")
 
 func _physics_process(delta):
 	if is_on_floor():

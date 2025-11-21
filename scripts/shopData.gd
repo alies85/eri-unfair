@@ -16,6 +16,8 @@ var shop_items = {
 	"customization": [
 		{"id": "red_skin", "name": "پوست قرمز", "price": 8, "icon": "res://assets/icon.svg"},
 		{"id": "blue_skin", "name": "پوست آبی", "price": 8, "icon": "res://assets/icon.svg"},
+		{"id": "green_skin", "name": "پوست سبز", "price": 8, "icon": "res://assets/icon.svg"},
+		{"id": "diamond_trail", "name": "دنباله الماس", "price": 12, "icon": "res://assets/icon.svg"},
 		{"id": "rainbow_trail", "name": "دنباله رنگین‌کمان", "price": 12, "icon": "res://assets/icon.svg"},
 		{"id": "star_particles", "name": "ذرات ستاره", "price": 10, "icon": "res://assets/icon.svg"}
 	]
@@ -24,11 +26,7 @@ var shop_items = {
 # Player data
 var total_gems = 0
 var purchased_items = []
-var equipped_items = {
-	"skin": "default",
-	"trail": "none",
-	"particles": "none"
-}
+var equipped_items = {}  # Dictionary of item_id -> true for equipped items
 
 const SAVE_PATH = "user://shopdata.save"
 
@@ -46,6 +44,10 @@ func _ready():
 # Check if item is purchased
 func is_purchased(item_id: String) -> bool:
 	return item_id in purchased_items
+
+# Check if item is equipped
+func is_equipped(item_id: String) -> bool:
+	return equipped_items.get(item_id, false)
 
 # Purchase an item
 func purchase_item(item_id: String, price: int) -> bool:
@@ -69,11 +71,48 @@ func get_item_by_id(item_id: String) -> Dictionary:
 				return item
 	return {}
 
-# Equip a cosmetic item
-func equip_item(item_id: String, slot: String):
-	if is_purchased(item_id):
-		equipped_items[slot] = item_id
+# Get category of an item
+func get_item_category(item_id: String) -> String:
+	for category_name in shop_items.keys():
+		for item in shop_items[category_name]:
+			if item["id"] == item_id:
+				return category_name
+	return ""
+
+# Equip an item
+func equip_item(item_id: String) -> bool:
+	if not is_purchased(item_id):
+		return false
+	
+	# Handle category exclusivity for skins
+	var category = get_item_category(item_id)
+	if category == "customization":
+		# Check if it's a skin (red_skin, blue_skin, green_skin)
+		if item_id in ["red_skin", "blue_skin", "green_skin"]:
+			# Unequip all other skins
+			for skin_id in ["red_skin", "blue_skin", "green_skin"]:
+				if skin_id != item_id and is_equipped(skin_id):
+					equipped_items.erase(skin_id)
+	
+	equipped_items[item_id] = true
+	save_data()
+	return true
+
+# Unequip an item
+func unequip_item(item_id: String) -> bool:
+	if is_equipped(item_id):
+		equipped_items.erase(item_id)
 		save_data()
+		return true
+	return false
+
+# Get list of equipped items
+func get_equipped_items() -> Array:
+	var items = []
+	for item_id in equipped_items.keys():
+		if equipped_items[item_id]:
+			items.append(item_id)
+	return items
 
 # Save data to file
 func save_data():
@@ -101,19 +140,30 @@ func load_data():
 				var data = json.data
 				total_gems = data.get("total_gems", 0)
 				purchased_items = data.get("purchased_items", [])
-				equipped_items = data.get("equipped_items", {
-					"skin": "default",
-					"trail": "none",
-					"particles": "none"
-				})
+				
+				# Handle both old and new equipped_items format
+				var loaded_equipped = data.get("equipped_items", {})
+				if loaded_equipped is Dictionary:
+					# Check if it's the old slot-based format
+					if "skin" in loaded_equipped or "trail" in loaded_equipped or "particles" in loaded_equipped:
+						# Convert old format to new format
+						equipped_items = {}
+						var old_skin = loaded_equipped.get("skin", "default")
+						if old_skin != "default" and old_skin != "none":
+							equipped_items[old_skin] = true
+						var old_trail = loaded_equipped.get("trail", "none")
+						if old_trail != "none":
+							equipped_items[old_trail] = true
+						var old_particles = loaded_equipped.get("particles", "none")
+						if old_particles != "none":
+							equipped_items[old_particles] = true
+					else:
+						# New format
+						equipped_items = loaded_equipped
 
 # Reset shop data (useful for testing)
 func reset_data():
 	total_gems = 0
 	purchased_items = []
-	equipped_items = {
-		"skin": "default",
-		"trail": "none",
-		"particles": "none"
-	}
+	equipped_items = {}
 	save_data()

@@ -10,6 +10,7 @@ func _ready():
 	$TabContainer/Powers.pressed.connect(_on_powers_tab_pressed)
 	$TabContainer/Items.pressed.connect(_on_items_tab_pressed)
 	$TabContainer/Customization.pressed.connect(_on_customization_tab_pressed)
+	$TabContainer/MyItems.pressed.connect(_on_my_items_tab_pressed)
 	
 	# Connect back button
 	$BackButton.pressed.connect(_on_back_button_pressed)
@@ -26,6 +27,10 @@ func _on_customization_tab_pressed():
 	current_tab = "customization"
 	update_items_display()
 
+func _on_my_items_tab_pressed():
+	current_tab = "my_items"
+	show_my_items_tab()
+
 func update_gem_display():
 	$GemCounter.text = "الماس: " + str(ShopData.total_gems)
 
@@ -33,6 +38,10 @@ func update_items_display():
 	# Clear existing items
 	for child in $ScrollContainer/ItemsContainer.get_children():
 		child.queue_free()
+	
+	# Don't show items for my_items tab (handled separately)
+	if current_tab == "my_items":
+		return
 	
 	# Get items for current tab
 	var items = ShopData.shop_items[current_tab]
@@ -78,15 +87,6 @@ func _on_buy_button_pressed(item: Dictionary):
 		# Success
 		update_gem_display()
 		update_items_display()
-		
-		# Auto-equip cosmetic items when purchased
-		if item["id"] in ["red_skin", "blue_skin"]:
-			ShopData.equip_item(item["id"], "skin")
-		elif item["id"] == "rainbow_trail":
-			ShopData.equip_item(item["id"], "trail")
-		elif item["id"] == "star_particles":
-			ShopData.equip_item(item["id"], "particles")
-		
 		show_message("خرید با موفقیت انجام شد!")
 	else:
 		# Failed
@@ -121,3 +121,95 @@ func _hide_message():
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
+
+func show_my_items_tab():
+	# Clear existing items
+	for child in $ScrollContainer/ItemsContainer.get_children():
+		child.queue_free()
+	
+	# Get all purchased items
+	var my_items = []
+	for category in ShopData.shop_items.values():
+		for item in category:
+			if ShopData.is_purchased(item["id"]):
+				my_items.append(item)
+	
+	# Show empty state if no items
+	if my_items.is_empty():
+		var empty_label = Label.new()
+		empty_label.text = "هنوز آیتمی خریداری نکرده‌اید"
+		empty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		empty_label.add_theme_font_size_override("font_size", 24)
+		empty_label.custom_minimum_size = Vector2(400, 100)
+		$ScrollContainer/ItemsContainer.add_child(empty_label)
+		return
+	
+	# Create item cards with equip buttons
+	for item in my_items:
+		var item_card = create_my_item_card(item)
+		$ScrollContainer/ItemsContainer.add_child(item_card)
+
+func create_my_item_card(item: Dictionary) -> Control:
+	var card = VBoxContainer.new()
+	card.custom_minimum_size = Vector2(150, 200)
+	
+	# Add visual styling for equipped items
+	if ShopData.is_equipped(item["id"]):
+		var panel = PanelContainer.new()
+		# Create a StyleBox for the equipped state
+		var style = StyleBoxFlat.new()
+		style.bg_color = Color(0.2, 0.6, 0.3, 0.3)  # Green tint
+		style.border_width_left = 2
+		style.border_width_right = 2
+		style.border_width_top = 2
+		style.border_width_bottom = 2
+		style.border_color = Color(0.3, 0.8, 0.4)  # Green border
+		panel.add_theme_stylebox_override("panel", style)
+		card.add_child(panel)
+		
+		var inner_card = VBoxContainer.new()
+		panel.add_child(inner_card)
+		card = inner_card
+	
+	# Item name
+	var name_label = Label.new()
+	name_label.text = item["name"]
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 20)
+	card.add_child(name_label)
+	
+	# Status label
+	var status_label = Label.new()
+	if ShopData.is_equipped(item["id"]):
+		status_label.text = "فعال"
+		status_label.add_theme_color_override("font_color", Color(0.3, 0.8, 0.3))
+	else:
+		status_label.text = "غیرفعال"
+		status_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	status_label.add_theme_font_size_override("font_size", 16)
+	card.add_child(status_label)
+	
+	# Equip/Unequip button
+	var toggle_button = Button.new()
+	if ShopData.is_equipped(item["id"]):
+		toggle_button.text = "غیرفعال کردن"
+	else:
+		toggle_button.text = "فعال کردن"
+	toggle_button.pressed.connect(_on_equip_button_pressed.bind(item["id"]))
+	toggle_button.add_theme_font_size_override("font_size", 18)
+	card.add_child(toggle_button)
+	
+	return card
+
+func _on_equip_button_pressed(item_id: String):
+	if ShopData.is_equipped(item_id):
+		ShopData.unequip_item(item_id)
+		show_message("غیرفعال شد!")
+	else:
+		ShopData.equip_item(item_id)
+		show_message("فعال شد!")
+	
+	# Refresh the display
+	show_my_items_tab()
