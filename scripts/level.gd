@@ -29,6 +29,7 @@ func death():
 
 func _on_gem_collected():
 	Global.score += 1
+	ShopData.add_gems(1)
 	if levelNO == 3:
 		Global.lvl3score += 1
 		if Global.lvl3score >= 11:
@@ -36,6 +37,11 @@ func _on_gem_collected():
 	$HUD.score(Global.score)
 
 func _on_trap_activated():#/////////////////////
+	# Check if player has shield
+	if $Player.has_shield and $Player.shield_active:
+		$Player.shield_active = false
+		# Visual feedback - player blinks or something
+		return
 	death()
 
 func _on_player_fell_into_void() -> void:

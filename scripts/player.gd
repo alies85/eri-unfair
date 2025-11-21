@@ -14,10 +14,52 @@ var squash_timer := 0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# Power-up variables
+var has_double_jump = false
+var jump_count = 0
+var has_shield = false
+var shield_active = false
+
+func _ready():
+	apply_powerups()
+	apply_cosmetics()
+
+func apply_powerups():
+	# Apply speed boost
+	if ShopData.is_purchased("speed_boost"):
+		SPEED = 300.0
+	else:
+		SPEED = 150.0
+	
+	# Apply jump boost
+	if ShopData.is_purchased("jump_boost"):
+		JUMP_VELOCITY = -400.0
+	else:
+		JUMP_VELOCITY = -300.0
+	
+	# Check double jump
+	has_double_jump = ShopData.is_purchased("double_jump")
+	
+	# Check shield
+	has_shield = ShopData.is_purchased("shield")
+	if has_shield:
+		shield_active = true
+
+func apply_cosmetics():
+	# Apply skin colors
+	var skin = ShopData.equipped_items.get("skin", "default")
+	if skin == "red_skin" and ShopData.is_purchased("red_skin"):
+		if has_node("AnimatedSprite2D"):
+			$AnimatedSprite2D.modulate = Color(1.5, 0.5, 0.5)
+	elif skin == "blue_skin" and ShopData.is_purchased("blue_skin"):
+		if has_node("AnimatedSprite2D"):
+			$AnimatedSprite2D.modulate = Color(0.5, 0.5, 1.5)
+
 func _physics_process(delta):
 	if is_on_floor():
 		is_on_ground = true
 		coyote_timer = coyote_time
+		jump_count = 0  # Reset jump count when on ground
 	else:
 		if coyote_timer > 0:
 			coyote_timer -= delta
@@ -27,9 +69,16 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	if Input.is_action_just_pressed("jump") and is_on_ground:
-		velocity.y = JUMP_VELOCITY
-		$JumpSfx.play()
+	# Handle jumping with double jump support
+	if Input.is_action_just_pressed("jump"):
+		if is_on_ground:
+			velocity.y = JUMP_VELOCITY
+			jump_count = 1
+			$JumpSfx.play()
+		elif has_double_jump and jump_count < 2:
+			velocity.y = JUMP_VELOCITY
+			jump_count = 2
+			$JumpSfx.play()
 	
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:

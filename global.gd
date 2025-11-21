@@ -3,6 +3,7 @@ extends Node
 var score = 0
 var currentLevel = 6
 var lvl3score = 0
+var total_gems = 0
 
 func _ready():
 	print_debug("global ready!")
