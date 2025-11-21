@@ -30,6 +30,5 @@ func _on_shop_button_pressed():
 	var shop_scene = preload("res://scenes/shop.tscn")
 	var shop = shop_scene.instantiate()
 	shop.name = "ShopOverlay"
-	shop.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().current_scene.call_deferred("add_child", shop)
 	get_tree().paused = true
