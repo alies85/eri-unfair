@@ -642,15 +642,16 @@ ease_mode = 1
 
 [node name="Door" parent="." instance=ExtResource("10_g1ckg")]
 position = Vector2(1034, 136)
+levelNO = 5
 
 [node name="Label" type="Label" parent="Door"]
 offset_left = -23.0
 offset_top = -32.0
 offset_right = 23.0
 offset_bottom = -9.0
-text = "Finish"
+text = "Level 5"
 
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
 [connection signal="spike_entered" from="MovingSpikes" to="." method="_on_spike_entered"]
 [connection signal="spike_entered" from="MovingSpikes2" to="." method="_on_spike_entered"]
-[connection signal="player_entered" from="Door" to="." method="_on_door_finish_player_entered"]
+[connection signal="player_entered" from="Door" to="." method="_on_door_player_entered"]

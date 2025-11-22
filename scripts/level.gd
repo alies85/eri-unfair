@@ -1,13 +1,8 @@
 extends Node2D
 
-signal gravityChange
-
 @export var levelNO = 0
 
-func _ready():
-	if levelNO >= 6:
-		gravityChange.emit()
-	
+func _ready():	
 	$HUD.level(levelNO)
 	Global.currentLevel = levelNO
 	
@@ -55,11 +50,14 @@ func _on_door_2_player_entered(level: Variant) -> void:
 func _on_spike_entered() -> void:
 	death()
 
+func _on_player_died() -> void:
+	death()
+
 func _input(event):
 	if event.is_action_pressed("reset_level"):
 		get_tree().reload_current_scene.call_deferred()
-		Global.score = 0
-		$HUD.score(Global.score)
+		#Global.score = 0
+		#$HUD.score(Global.score)
 
 func _on_timer_timeout() -> void:
 	$Door.visible = true

@@ -21,6 +21,10 @@ var has_shield = false
 var shield_active = false
 
 func _ready():
+	if self.get_parent().levelNO >= 7:
+		JUMP_VELOCITY = -200
+		gravity = 350
+	
 	apply_powerups()
 	apply_cosmetics()
 
@@ -34,6 +38,12 @@ func apply_powerups():
 	# Apply jump boost only if equipped
 	if ShopData.is_equipped("jump_boost"):
 		JUMP_VELOCITY = -230.0  # -300 / 1.3
+	else:
+		JUMP_VELOCITY = -300.0
+	
+	# Apply jump boost only if equipped
+	if ShopData.is_equipped("10x_jump_boost"):
+		JUMP_VELOCITY = -100.0  # -300 / 1.3
 	else:
 		JUMP_VELOCITY = -300.0
 	
@@ -127,8 +137,3 @@ func _physics_process(delta):
 		fell_into_void.emit()
 
 	move_and_slide()
-
-
-func _on_gravity_change() -> void:
-	JUMP_VELOCITY = -200
-	gravity = 350

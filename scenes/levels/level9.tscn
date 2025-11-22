@@ -1,16 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://j5ajnuyysch7"]
+[gd_scene load_steps=19 format=3 uid="uid://bt5si7jhct0b5"]
 
 [ext_resource type="Script" uid="uid://dgjlcnkx2hkfr" path="res://scripts/level.gd" id="1_xkdka"]
 [ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="2_fal67"]
 [ext_resource type="PackedScene" uid="uid://bdyp538fqygcq" path="res://scenes/hud.tscn" id="3_eu1gj"]
-[ext_resource type="AudioStream" uid="uid://cxoidqjb5kyw2" path="res://assets/background.mp3" id="4_ace8g"]
+[ext_resource type="AudioStream" uid="uid://cxpduwejtdppy" path="res://assets/9.mp3" id="4_xkdka"]
 [ext_resource type="PackedScene" uid="uid://cboi8hec4yf0c" path="res://scenes/player.tscn" id="5_xntys"]
 [ext_resource type="PackedScene" uid="uid://clikcsot5ncta" path="res://scenes/door.tscn" id="6_iek1g"]
 [ext_resource type="PackedScene" uid="uid://dypev0qrj3e6s" path="res://scenes/gem.tscn" id="7_a25dg"]
 [ext_resource type="PackedScene" uid="uid://cd7guqg431q4v" path="res://scenes/platforms/breaking.tscn" id="8_2p0ou"]
 [ext_resource type="PackedScene" uid="uid://dh3flqow8nnd0" path="res://scenes/platforms/movingSpikes.tscn" id="10_8x1us"]
 [ext_resource type="PackedScene" uid="uid://ckltobbyi5eu" path="res://scenes/platforms/moving.tscn" id="10_80f0i"]
-[ext_resource type="PackedScene" uid="uid://13tkvh3d1kwq" path="res://scenes/enemy.tscn" id="11_hfx0x"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="11_hfx0x"]
 [ext_resource type="PackedScene" uid="uid://3ybr0fh382e" path="res://scenes/jumpPad.tscn" id="11_xkdka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6issp"]
@@ -589,25 +589,23 @@ layer_0/tile_data = PackedInt32Array(786455, 524288, 4, 786456, 524288, 4, 78645
 [node name="HUD" parent="." instance=ExtResource("3_eu1gj")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ace8g")
+stream = ExtResource("4_xkdka")
 autoplay = true
 parameters/looping = true
 
 [node name="Player" parent="." instance=ExtResource("5_xntys")]
-position = Vector2(1509, 198)
-
-[node name="InvisBox" type="AnimatableBody2D" parent="."]
+position = Vector2(383, 187)
 
 [node name="Door" parent="." instance=ExtResource("6_iek1g")]
 position = Vector2(1708, 88)
-levelNO = 2
+levelNO = 10
 
 [node name="Label" type="Label" parent="Door"]
-offset_left = -24.0
+offset_left = -21.0
 offset_top = -32.0
-offset_right = 30.0
+offset_right = 42.0
 offset_bottom = -6.0
-text = "Level 9"
+text = "Finish"
 
 [node name="Traps" type="Node" parent="."]
 
@@ -633,8 +631,6 @@ position = Vector2(504, 43)
 
 [node name="Gem8" parent="Gems" instance=ExtResource("7_a25dg")]
 position = Vector2(1383, 198)
-
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -669,7 +665,7 @@ curve = SubResource("Curve2D_fal67")
 move_duration = 0.01
 
 [connection signal="fell_into_void" from="Player" to="." method="_on_player_fell_into_void"]
-[connection signal="player_entered" from="Door" to="." method="_on_door_player_entered"]
+[connection signal="player_entered" from="Door" to="." method="_on_door_finish_player_entered"]
 [connection signal="player_died" from="enemies/enemy2" to="." method="_on_player_died"]
 [connection signal="player_died" from="enemies/enemy3" to="." method="_on_player_died"]
 [connection signal="spike_entered" from="MovingSpikes" to="." method="_on_spike_entered"]

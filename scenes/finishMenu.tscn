@@ -38,13 +38,6 @@ text = "تبریک شما با موفقیت اسکل شدید!"
 horizontal_alignment = 1
 language = "fa"
 
-[node name="ResCode" type="Label" parent="."]
-offset_left = 439.0
-offset_top = 411.0
-offset_right = 692.0
-offset_bottom = 477.0
-theme_override_font_sizes/font_size = 20
-
 [node name="Options" type="VFlowContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0

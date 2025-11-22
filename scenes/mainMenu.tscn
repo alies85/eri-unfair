@@ -11,6 +11,23 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_top = 72.0
+offset_right = 12.0
+offset_bottom = 209.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 100
+text = "Eri"
+horizontal_alignment = 1
+
 [node name="GameLabel" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 5
@@ -25,17 +42,18 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -96.0
-offset_top = 4.0
-offset_right = 40.0
-offset_bottom = 141.0
+offset_left = 83.0
+offset_top = 506.0
+offset_right = 565.0
+offset_bottom = 582.0
 grow_horizontal = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_type_variation = &"HeaderLarge"
-theme_override_font_sizes/font_size = 100
-text = "Eri"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+text = "(R) ریست لول بدون از دست دادن امتیازات
+(H) باز و بسته کردن فروشگاه"
+horizontal_alignment = 2
 
 [node name="TitleLabel2" type="Label" parent="Control/GameLabel"]
 layout_mode = 0

@@ -13,15 +13,10 @@ func generate_hash(solver_group_id: String, private_key: String) -> String:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("FinishMenu ready!")
-	
-	$ResCode.text = generate_hash("", "1KW7WRNH")
-	
+		
 	if !OS.has_feature("pc"):
 		$Options/FullscreenButton.hide()
 		$Options/QuitButton.hide()
-
-func _on_start_button_pressed():#//////////////
-	get_tree().change_scene_to_file("res://scenes/levels/level%d.tscn" % [Global.currentLevel])
 
 func _on_fullscreen_button_pressed():
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:

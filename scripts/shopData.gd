@@ -6,7 +6,8 @@ var shop_items = {
 		{"id": "double_jump", "name": "پرش دوبل", "price": 5, "icon": "res://assets/icon.svg"},
 		{"id": "speed_boost", "name": "افزایش سرعت", "price": 3, "icon": "res://assets/icon.svg"},
 		{"id": "shield", "name": "سپر", "price": 4, "icon": "res://assets/icon.svg"},
-		{"id": "jump_boost", "name": "افزایش پرش", "price": 3, "icon": "res://assets/icon.svg"}
+		{"id": "jump_boost", "name": "افزایش پرش", "price": 3, "icon": "res://assets/icon.svg"},
+		{"id": "10x_jump_boost", "name": "افزایش پرش *10", "price": 3, "icon": "res://assets/icon.svg"}
 	],
 	"items": [
 		{"id": "extra_life", "name": "جان اضافی", "price": 10, "icon": "res://assets/icon.svg"},
