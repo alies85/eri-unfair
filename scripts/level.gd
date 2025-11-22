@@ -54,7 +54,7 @@ func _on_player_died() -> void:
 	death()
 
 func _input(event):
-	if event.is_action_pressed("reset_level"):
+	if event.is_action_pressed("reset_level") and find_child("Player").is_on_floor():
 		get_tree().reload_current_scene.call_deferred()
 		#Global.score = 0
 		#$HUD.score(Global.score)
