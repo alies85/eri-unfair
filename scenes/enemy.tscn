@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://13tkvh3d1kwq"]
+
+[ext_resource type="Texture2D" uid="uid://dgbvvcrkn8jtl" path="res://assets/tilemap.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://cp48gw7nmamv7" path="res://scripts/enemy.gd" id="1_md0e3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_komt3"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(0, 288, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x7nc"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(17, 288, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lifsd"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(34, 288, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw1kd"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(51, 288, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v622"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(68, 288, 17, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofvo0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_komt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x7nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lifsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hw1kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5v622")
+}],
+"loop": true,
+"name": &"running",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnxpb"]
+size = Vector2(9, 9.5)
+
+[node name="enemy" type="Area2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_md0e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ofvo0")
+animation = &"running"
+autoplay = "running"
+frame = 1
+frame_progress = 0.22922641
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.75)
+shape = SubResource("RectangleShape2D_lnxpb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.5
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
